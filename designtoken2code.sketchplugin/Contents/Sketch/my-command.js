@@ -101,7 +101,14 @@ var exports =
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function (context) {
-  context.document.showMessage("It's alive 🙌");
+  var selectedLayers = context.selection;
+  var selectedCount = selectedLayers.length;
+
+  if (selectedCount === 0) {
+    context.document.showMessage('No layers are selected.');
+  } else {
+    context.document.showMessage("".concat(selectedCount, " layers selected."));
+  }
 });
 
 /***/ })
