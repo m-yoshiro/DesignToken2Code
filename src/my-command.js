@@ -1,3 +1,5 @@
+const { prefix } = require('config');
+
 export default function(context) {
   const selectedLayers = context.selection
   const selectedCount = selectedLayers.length
