@@ -3,10 +3,16 @@ const { prefix, artboardName } = require('./config');
 
 export default function(context) {
   const document = sketch.fromNative(context.document);
-  const tokens = document.getLayersNamed(artboardName);
+  const tokensArtboard = document.getLayersNamed(artboardName)[0];
 
-  if (tokens.length > 0 ) {
-    context.document.showMessage(tokens[0].name);
+  if (tokensArtboard.length > 0 ) {
+    context.document.showMessage(tokensArtboard.name);
+  } else {
+    context.document.showMessage('not fond');
+  }
+
+  if (tokensArtboard.layers.length > 0) {
+    context.document.showMessage(`Tokens artboard has layers.`);
   } else {
     context.document.showMessage('not fond');
   }
