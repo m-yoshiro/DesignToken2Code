@@ -1,14 +1,13 @@
 const sketch = require('sketch/dom');
-const { prefix } = require('config');
+const { prefix, artboardName } = require('./config');
 
 export default function(context) {
-  const document = sketch.fromNative(context.document)
-  const selectedLayers = context.selection;
-  const selectedCount = selectedLayers.length;
+  const document = sketch.fromNative(context.document);
+  const tokensArtboard = document.getLayersNamed(artboardName);
 
-  if (selectedCount === 0) {
-    context.document.showMessage('No layers are selected.');
+  if (tokensArtboard.length > 0 ) {
+    context.document.showMessage(tokensArtboard[0].name);
   } else {
-    context.document.showMessage(`${selectedCount} layers selected.`);
+    context.document.showMessage('not fond');
   }
 }

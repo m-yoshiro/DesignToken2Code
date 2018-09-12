@@ -1,3 +1,4 @@
-export default {
+module.exports = {
   prefix: '$color',
+  artboardName: 'Tokens',
 }
