@@ -91,6 +91,20 @@ var exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/config.js":
+/*!***********************!*\
+  !*** ./src/config.js ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {
+  prefix: '$color',
+  artboardName: 'Tokens'
+};
+
+/***/ }),
+
 /***/ "./src/my-command.js":
 /*!***************************!*\
   !*** ./src/my-command.js ***!
@@ -100,16 +114,39 @@ var exports =
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (function (context) {
-  var selectedLayers = context.selection;
-  var selectedCount = selectedLayers.length;
+var sketch = __webpack_require__(/*! sketch/dom */ "sketch/dom");
 
-  if (selectedCount === 0) {
-    context.document.showMessage('No layers are selected.');
+var _require = __webpack_require__(/*! ./config */ "./src/config.js"),
+    prefix = _require.prefix,
+    artboardName = _require.artboardName;
+
+/* harmony default export */ __webpack_exports__["default"] = (function (context) {
+  var document = sketch.fromNative(context.document);
+  var tokensArtboard = document.getLayersNamed(artboardName)[0];
+
+  if (tokensArtboard.length > 0) {
+    context.document.showMessage(tokensArtboard.name);
   } else {
-    context.document.showMessage("".concat(selectedCount, " layers selected."));
+    context.document.showMessage('not fond');
+  }
+
+  if (tokensArtboard.layers.length > 0) {
+    context.document.showMessage("Tokens artboard has layers.");
+  } else {
+    context.document.showMessage('not fond');
   }
 });
+
+/***/ }),
+
+/***/ "sketch/dom":
+/*!*****************************!*\
+  !*** external "sketch/dom" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("sketch/dom");
 
 /***/ })
 
