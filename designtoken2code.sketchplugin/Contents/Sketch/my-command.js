@@ -120,22 +120,42 @@ var _require = __webpack_require__(/*! ./config */ "./src/config.js"),
     prefix = _require.prefix,
     artboardName = _require.artboardName;
 
+var _require2 = __webpack_require__(/*! ./utils */ "./src/utils.js"),
+    escapeRegExp = _require2.escapeRegExp;
+
 /* harmony default export */ __webpack_exports__["default"] = (function (context) {
   var document = sketch.fromNative(context.document);
   var tokensArtboard = document.getLayersNamed(artboardName)[0];
+  var re = new RegExp('^' + escapeRegExp(prefix));
 
-  if (tokensArtboard.length > 0) {
-    context.document.showMessage(tokensArtboard.name);
-  } else {
-    context.document.showMessage('not fond');
-  }
-
-  if (tokensArtboard.layers.length > 0) {
-    context.document.showMessage("Tokens artboard has layers.");
+  if (tokensArtboard.layers) {
+    var tokens = tokensArtboard.layers.filter(function (elm) {
+      return re.test(elm.name);
+    });
+    var names = tokens.map(function (elm) {
+      return elm.name;
+    }).reduce(function (a, b) {
+      return a + b;
+    });
+    context.document.showMessage(names);
   } else {
     context.document.showMessage('not fond');
   }
 });
+
+/***/ }),
+
+/***/ "./src/utils.js":
+/*!**********************!*\
+  !*** ./src/utils.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports.escapeRegExp = function (string) {
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+};
 
 /***/ }),
 
