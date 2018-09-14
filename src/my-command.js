@@ -1,18 +1,17 @@
 const sketch = require('sketch/dom');
 const { prefix, artboardName } = require('./config');
+const { escapeRegExp } = require('./utils');
 
 export default function(context) {
   const document = sketch.fromNative(context.document);
   const tokensArtboard = document.getLayersNamed(artboardName)[0];
+  const re = new RegExp('^' + escapeRegExp(prefix));
 
-  if (tokensArtboard.length > 0 ) {
-    context.document.showMessage(tokensArtboard.name);
-  } else {
-    context.document.showMessage('not fond');
-  }
+  if (tokensArtboard.layers) {
+    const tokens = tokensArtboard.layers.filter( elm => re.test(elm.name) );
+    const names = tokens.map(elm => elm.name).reduce( (a, b) => a + b );
 
-  if (tokensArtboard.layers.length > 0) {
-    context.document.showMessage(`Tokens artboard has layers.`);
+    context.document.showMessage(names);
   } else {
     context.document.showMessage('not fond');
   }
