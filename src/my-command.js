@@ -5,10 +5,10 @@ const { escapeRegExp } = require('./utils');
 export default function(context) {
   const document = sketch.fromNative(context.document);
   const tokensArtboard = document.getLayersNamed(artboardName)[0];
-  const re = new RegExp('^' + escapeRegExp(prefix));
+  const tokenNamePattern = new RegExp('^' + escapeRegExp(prefix));
 
   if (tokensArtboard.layers) {
-    const tokens = tokensArtboard.layers.filter( elm => re.test(elm.name) );
+    const tokens = tokensArtboard.layers.filter( elm => tokenNamePattern.test(elm.name) );
     const names = tokens.map(elm => elm.name).reduce( (a, b) => a + b );
 
     context.document.showMessage(names);
