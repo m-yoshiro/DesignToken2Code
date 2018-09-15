@@ -8,18 +8,23 @@ export default function(context) {
   const tokenNamePattern = new RegExp(`^${escapeRegExp(prefix)}`);
 
   if (tokensArtboard.layers) {
-    const generateTokensFromLayers = (layers) => {
-      return layers.filter( elm => tokenNamePattern.test(elm.name) )
-        .map( elm => {
-          return {
-            name: elm.name,
-            color: elm.style.fills[0].color,
-          };
-        });
+    const getTokenLayersByPattern = (layers, pattern) => {
+      return layers.filter( elm => ('style' in elm) && pattern.test(elm.name) );
     };
-    const tokens = generateTokensFromLayers(tokensArtboard.layers);
-    const message = tokens.map(elm => `${elm.name}: ${elm.color}, ` ).reduce( (a, b) => a + b );
 
+    const generateTokensFromLayers = (layers) => {
+      return layers.map( elm => {
+        return {
+          name: elm.name,
+          color: elm.style.fills[0].color,
+        };
+      });
+    };
+
+    const tokenLayers = getTokenLayersByPattern(tokensArtboard.layers, tokenNamePattern);
+    const tokens = generateTokensFromLayers(tokenLayers);
+
+    const message = tokens.map(elm => `${elm.name}: ${elm.color}, ` ).reduce( (a, b) => a + b );
     context.document.showMessage(message);
   } else {
     context.document.showMessage('not fond');

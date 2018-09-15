@@ -129,10 +129,14 @@ var _require2 = __webpack_require__(/*! ./utils */ "./src/utils.js"),
   var tokenNamePattern = new RegExp("^".concat(escapeRegExp(prefix)));
 
   if (tokensArtboard.layers) {
-    var generateTokensFromLayers = function generateTokensFromLayers(layers) {
+    var getTokenLayersByPattern = function getTokenLayersByPattern(layers, pattern) {
       return layers.filter(function (elm) {
-        return tokenNamePattern.test(elm.name);
-      }).map(function (elm) {
+        return 'style' in elm && pattern.test(elm.name);
+      });
+    };
+
+    var generateTokensFromLayers = function generateTokensFromLayers(layers) {
+      return layers.map(function (elm) {
         return {
           name: elm.name,
           color: elm.style.fills[0].color
@@ -140,7 +144,8 @@ var _require2 = __webpack_require__(/*! ./utils */ "./src/utils.js"),
       });
     };
 
-    var tokens = generateTokensFromLayers(tokensArtboard.layers);
+    var tokenLayers = getTokenLayersByPattern(tokensArtboard.layers, tokenNamePattern);
+    var tokens = generateTokensFromLayers(tokenLayers);
     var message = tokens.map(function (elm) {
       return "".concat(elm.name, ": ").concat(elm.color, ", ");
     }).reduce(function (a, b) {
