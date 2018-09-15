@@ -8,10 +8,18 @@ export default function(context) {
   const tokenNamePattern = new RegExp('^' + escapeRegExp(prefix));
 
   if (tokensArtboard.layers) {
-    const tokens = tokensArtboard.layers.filter( elm => tokenNamePattern.test(elm.name) );
-    const names = tokens.map(elm => elm.name).reduce( (a, b) => a + b );
+    const tokens = tokensArtboard.layers
+      .filter( elm => tokenNamePattern.test(elm.name) )
+      .map( elm => {
+        return {
+          name: elm.name,
+          color: elm.style.fills[0].color,
+        };
+      });
 
-    context.document.showMessage(names);
+    const message = tokens.map(elm => `${elm.name}: ${elm.color}, ` ).reduce( (a, b) => a + b );
+
+    context.document.showMessage(message);
   } else {
     context.document.showMessage('not fond');
   }
