@@ -123,21 +123,35 @@ var _require = __webpack_require__(/*! ./config */ "./src/config.js"),
 var _require2 = __webpack_require__(/*! ./utils */ "./src/utils.js"),
     escapeRegExp = _require2.escapeRegExp;
 
+var getTokenLayersByPattern = function getTokenLayersByPattern(layers, pattern) {
+  return layers.filter(function (elm) {
+    return 'style' in elm && pattern.test(elm.name);
+  });
+};
+
+var generateTokensFromLayers = function generateTokensFromLayers(layers) {
+  return layers.map(function (elm) {
+    return {
+      name: elm.name,
+      color: elm.style.fills[0].color
+    };
+  });
+};
+
 /* harmony default export */ __webpack_exports__["default"] = (function (context) {
   var document = sketch.fromNative(context.document);
   var tokensArtboard = document.getLayersNamed(artboardName)[0];
-  var re = new RegExp('^' + escapeRegExp(prefix));
+  var tokenNamePattern = new RegExp("^".concat(escapeRegExp(prefix)));
 
   if (tokensArtboard.layers) {
-    var tokens = tokensArtboard.layers.filter(function (elm) {
-      return re.test(elm.name);
-    });
-    var names = tokens.map(function (elm) {
-      return elm.name;
+    var tokenLayers = getTokenLayersByPattern(tokensArtboard.layers, tokenNamePattern);
+    var tokens = generateTokensFromLayers(tokenLayers);
+    var message = tokens.map(function (elm) {
+      return "".concat(elm.name, ": ").concat(elm.color, ", ");
     }).reduce(function (a, b) {
       return a + b;
     });
-    context.document.showMessage(names);
+    context.document.showMessage(message);
   } else {
     context.document.showMessage('not fond');
   }
