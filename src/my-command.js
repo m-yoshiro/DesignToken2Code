@@ -25,9 +25,18 @@ export default function(context) {
     const tokenLayers = getTokenLayersByPattern(tokensArtboard.layers, tokenNamePattern);
     const tokens = generateTokensFromLayers(tokenLayers);
 
-    const message = tokens.map(elm => `${elm.name}: ${elm.color}, ` ).reduce( (a, b) => a + b );
-    context.document.showMessage(message);
+    const message = tokens.map(elm => `${elm.name}: ${elm.color},\n` ).reduce( (a, b) => a + b );
+
+    // Dialog
+    const dialog = NSAlert.alloc().init();
+    dialog.messageText = message;
+    dialog.runModal();
+
+    // Copy to clipboard
+    let pasteBoard = NSPasteboard.generalPasteboard()
+    pasteBoard.clearContents()
+    pasteBoard.writeObjects([message])
   } else {
-    context.document.showMessage('not fond');
+    UI.message('not fond');
   }
 }
