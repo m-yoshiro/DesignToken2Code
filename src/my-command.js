@@ -1,9 +1,9 @@
 const sketch = require('sketch/dom');
+const { UI } = require('sketch');
 const { prefix, artboardName } = require('./config');
 const { escapeRegExp } = require('./utils');
 
 const getTokenLayersByPattern = (layers, pattern) => {
-  return layers.filter( elm => ('style' in elm) && pattern.test(elm.name) );
   return layers.filter( elm => (elm.type === `${sketch.Types.Shape}`) && pattern.test(elm.name) );
 };
 
