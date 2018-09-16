@@ -116,16 +116,19 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 var sketch = __webpack_require__(/*! sketch/dom */ "sketch/dom");
 
-var _require = __webpack_require__(/*! ./config */ "./src/config.js"),
-    prefix = _require.prefix,
-    artboardName = _require.artboardName;
+var _require = __webpack_require__(/*! sketch */ "sketch"),
+    UI = _require.UI;
 
-var _require2 = __webpack_require__(/*! ./utils */ "./src/utils.js"),
-    escapeRegExp = _require2.escapeRegExp;
+var _require2 = __webpack_require__(/*! ./config */ "./src/config.js"),
+    prefix = _require2.prefix,
+    artboardName = _require2.artboardName;
+
+var _require3 = __webpack_require__(/*! ./utils */ "./src/utils.js"),
+    escapeRegExp = _require3.escapeRegExp;
 
 var getTokenLayersByPattern = function getTokenLayersByPattern(layers, pattern) {
   return layers.filter(function (elm) {
-    return 'style' in elm && pattern.test(elm.name);
+    return elm.type === "".concat(sketch.Types.Shape) && pattern.test(elm.name);
   });
 };
 
@@ -147,13 +150,20 @@ var generateTokensFromLayers = function generateTokensFromLayers(layers) {
     var tokenLayers = getTokenLayersByPattern(tokensArtboard.layers, tokenNamePattern);
     var tokens = generateTokensFromLayers(tokenLayers);
     var message = tokens.map(function (elm) {
-      return "".concat(elm.name, ": ").concat(elm.color, ", ");
+      return "".concat(elm.name, ": ").concat(elm.color, ",\n");
     }).reduce(function (a, b) {
       return a + b;
-    });
-    context.document.showMessage(message);
+    }); // Dialog
+
+    var dialog = NSAlert.alloc().init();
+    dialog.messageText = message;
+    dialog.runModal(); // Copy to clipboard
+
+    var pasteBoard = NSPasteboard.generalPasteboard();
+    pasteBoard.clearContents();
+    pasteBoard.writeObjects([message]);
   } else {
-    context.document.showMessage('not fond');
+    UI.message('not fond');
   }
 });
 
@@ -170,6 +180,17 @@ module.exports.escapeRegExp = function (string) {
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 };
+
+/***/ }),
+
+/***/ "sketch":
+/*!*************************!*\
+  !*** external "sketch" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("sketch");
 
 /***/ }),
 

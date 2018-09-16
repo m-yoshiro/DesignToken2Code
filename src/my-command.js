@@ -1,9 +1,10 @@
 const sketch = require('sketch/dom');
+const { UI } = require('sketch');
 const { prefix, artboardName } = require('./config');
 const { escapeRegExp } = require('./utils');
 
 const getTokenLayersByPattern = (layers, pattern) => {
-  return layers.filter( elm => ('style' in elm) && pattern.test(elm.name) );
+  return layers.filter( elm => (elm.type === `${sketch.Types.Shape}`) && pattern.test(elm.name) );
 };
 
 const generateTokensFromLayers = (layers) => {
@@ -24,9 +25,18 @@ export default function(context) {
     const tokenLayers = getTokenLayersByPattern(tokensArtboard.layers, tokenNamePattern);
     const tokens = generateTokensFromLayers(tokenLayers);
 
-    const message = tokens.map(elm => `${elm.name}: ${elm.color}, ` ).reduce( (a, b) => a + b );
-    context.document.showMessage(message);
+    const message = tokens.map(elm => `${elm.name}: ${elm.color},\n` ).reduce( (a, b) => a + b );
+
+    // Dialog
+    const dialog = NSAlert.alloc().init();
+    dialog.messageText = message;
+    dialog.runModal();
+
+    // Copy to clipboard
+    let pasteBoard = NSPasteboard.generalPasteboard()
+    pasteBoard.clearContents()
+    pasteBoard.writeObjects([message])
   } else {
-    context.document.showMessage('not fond');
+    UI.message('not fond');
   }
 }
