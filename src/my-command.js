@@ -37,6 +37,6 @@ export default function(context) {
     pasteBoard.clearContents()
     pasteBoard.writeObjects([message])
   } else {
-    UI.message('Not fond');
+    UI.message('Not found');
   }
 }
