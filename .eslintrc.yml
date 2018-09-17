@@ -3,13 +3,13 @@
 root: true
 extends:
   - airbnb-base
-  - plugin:import/errors
   - prettier
 plugins:
   - no-not-accumulator-reassign
   - prettier
+  - babel
 env:
-    node: true
+  node: true
 rules:
   no-param-reassign: 0
   import/no-dynamic-require: 0
@@ -20,6 +20,17 @@ rules:
   global-require: 0
   no-console: 0
   no-not-accumulator-reassign/no-not-accumulator-reassign: [2, ['reduce'], {props: true}]
+  import/no-unresolved:
+    - error
+    - commonjs: true
+      caseSensitive: true
+      ignore:
+        - '^sketch(\/|$)'
+  prettier/prettier:
+    - error
+    - singleQuote: true
+      trailingComma: es5
+      semi: false
 
 # https://github.com/BohemianCoding/SketchAPI/blob/develop/.eslintrc.yml#L11
 globals:
@@ -66,6 +77,7 @@ globals:
   NSSaveToOperation: false
   NSData: false
   NSDataBase64DecodingIgnoreUnknownCharacters: false
+  NSPasteboard: false
   __command: false
   MSFlowConnection: false
   MSHotspotLayer: false
@@ -112,3 +124,13 @@ globals:
   MSImmutableSymbolMaster: false
   MSImmutableTextLayer: false
   MSImmutableDocumentData: false
+
+parserOptions:
+  sourceType: module
+
+settings:
+  import/resolver:
+    node:
+      extensions:
+        - .js
+        - .json
