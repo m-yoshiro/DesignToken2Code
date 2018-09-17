@@ -146,24 +146,34 @@ var generateTokensFromLayers = function generateTokensFromLayers(layers) {
   var tokensArtboard = document.getLayersNamed(artboardName)[0];
   var tokenNamePattern = new RegExp("^".concat(escapeRegExp(prefix)));
 
-  if (tokensArtboard.layers) {
-    var tokenLayers = getTokenLayersByPattern(tokensArtboard.layers, tokenNamePattern);
-    var tokens = generateTokensFromLayers(tokenLayers);
-    var message = tokens.map(function (elm) {
-      return "".concat(elm.name, ": ").concat(elm.color, ",\n");
-    }).reduce(function (a, b) {
-      return a + b;
-    }); // Dialog
+  if (!tokensArtboard.layers.length) {
+    UI.message('Not found');
+    return;
+  }
 
-    var dialog = NSAlert.alloc().init();
-    dialog.messageText = message;
-    dialog.runModal(); // Copy to clipboard
+  var tokenLayers = getTokenLayersByPattern(tokensArtboard.layers, tokenNamePattern);
+  var tokens = generateTokensFromLayers(tokenLayers);
+  var message = tokens.map(function (elm) {
+    return "".concat(elm.name, ": ").concat(elm.color, ",\n");
+  }).reduce(function (a, b) {
+    return a + b;
+  }); // Dialog
 
+  var dialog = NSAlert.alloc().init();
+  dialog.messageText = 'DesignTokens2Code';
+  dialog.informativeText = message;
+  dialog.addButtonWithTitle('Copy');
+  dialog.addButtonWithTitle('Close');
+  var buttons = dialog.buttons(); // https://github.com/skpm/dialog/blob/master/lib/message-box.js#L96
+
+  var response = Number(dialog.runModal()) - 1000;
+
+  if (response === 0) {
+    // Copy to clipboard
     var pasteBoard = NSPasteboard.generalPasteboard();
     pasteBoard.clearContents();
     pasteBoard.writeObjects([message]);
-  } else {
-    UI.message('not fond');
+    context.document.showMessage('Copied!');
   }
 });
 
