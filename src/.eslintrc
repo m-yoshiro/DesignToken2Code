@@ -13,6 +13,6 @@
     "node": true
   },
   "rules":{
-    "no-not-accumulator-reassign/no-not-accumulator-reassign": [2, ['reduce'], {props: true}]
+    "no-not-accumulator-reassign/no-not-accumulator-reassign": [2, ["reduce"], {"props": true}]
   }
 }

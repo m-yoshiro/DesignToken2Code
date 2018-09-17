@@ -41,7 +41,7 @@
   "lint-staged": {
     "*.js": [
       "npm run prettier:base",
-      "eslint --quiet --rule 'prettier/prettier: [\"error\", {\"trailingComma\": \"es5\", \"singleQuote\": true}]'",
+      "eslint --fix --quiet --rule 'prettier/prettier: [\"error\", {\"trailingComma\": \"es5\", \"singleQuote\": true}]'",
       "git add"
     ]
   },
