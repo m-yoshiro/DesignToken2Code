@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@skpm/builder": "^0.5.2",
+    "eslint": "^5.6.0",
     "eslint-config-prettier": "^3.0.1",
     "eslint-plugin-prettier": "^2.6.2",
     "husky": "^1.0.0-rc.14",
