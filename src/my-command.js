@@ -29,8 +29,8 @@ export default function(context) {
 
     // Dialog
     const dialog = NSAlert.alloc().init();
-    dialog.messageText = message;
-    dialog.runModal();
+  dialog.messageText = 'DesignTokens2Code';
+  dialog.informativeText = message;
 
     // Copy to clipboard
     let pasteBoard = NSPasteboard.generalPasteboard()
