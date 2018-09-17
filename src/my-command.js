@@ -32,6 +32,8 @@ export default function(context) {
   dialog.messageText = 'DesignTokens2Code';
   dialog.informativeText = message;
 
+  dialog.addButtonWithTitle('Copy');
+  dialog.addButtonWithTitle('Close');
     // Copy to clipboard
     let pasteBoard = NSPasteboard.generalPasteboard()
     pasteBoard.clearContents()
