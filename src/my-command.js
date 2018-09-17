@@ -29,7 +29,7 @@ export default function(context) {
   const tokenLayers = getTokenLayersByPattern(tokensArtboard.layers, tokenNamePattern);
   const tokens = generateTokensFromLayers(tokenLayers);
 
-  const message = tokens.map(elm => `${elm.name}: ${elm.color},\n` ).reduce( (a, b) => a + b );
+  const message = tokens.map(elm => `${elm.name}: ${elm.color};\n` ).reduce( (a, b) => a + b );
 
   // Dialog
   const dialog = NSAlert.alloc().init();
