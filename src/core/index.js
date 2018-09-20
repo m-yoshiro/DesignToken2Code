@@ -15,8 +15,8 @@ const testTokens = [
 ]
 
 class DesignTokens {
-  constructor(tokens) {
-    this.tokens = tokens
+  constructor() {
+    this.tokens = []
   }
 }
 
