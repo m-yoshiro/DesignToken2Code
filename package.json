@@ -19,7 +19,8 @@
     "postinstall": "npm run build && skpm-link",
     "lint-staged": "lint-staged",
     "prettier:base": "prettier --single-quote --trailing-comma es5 --no-semi --write",
-    "prettify": "npm run prettier:base \"./src/**/*.js\""
+    "prettify": "npm run prettier:base \"./src/**/*.js\"",
+    "test": "mocha"
   },
   "devDependencies": {
     "@skpm/builder": "^0.5.2",
