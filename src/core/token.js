@@ -32,6 +32,7 @@ module.exports = class Token {
   }
 
   output() {
+    // TODO: test `name` has `$`
     const { name, value } = this.data
     const scssVariable = `$${name}: ${value} !default;`
 
