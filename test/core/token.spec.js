@@ -18,7 +18,7 @@ describe('Token Class:', () => {
     )
   })
 
-  it('Should throw TypeError', () => {
+  it('Should throw TypeError when prop type is not "string"', () => {
     assert.throws(() => {
       const newToken = new Token({
         type: 87,
