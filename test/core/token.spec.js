@@ -1,7 +1,14 @@
 /* global describe:false, it:false, context:false */
 const { assert } = require('chai')
-
 const Token = require('../../src/core/token')
+
+const testToken = {
+  type: 'color',
+  format: 'scss',
+  name: 'token-name',
+  value: '#fff',
+}
+
 /* eslint-disable no-unused-vars */
 describe('Token', () => {
   describe('#validate()', () => {
@@ -38,8 +45,14 @@ describe('Token', () => {
   // TODO:
   describe('#output()', () => {
     context('when output tokens with "scss" format', () => {
-      it('Should output code is scss format', () => {
-        assert.isOk('everything is ok')
+      it('Should return scss variable', () => {
+        const newToken = new Token(testToken)
+
+        assert.equal(
+          newToken.output(),
+          '$token-name: #fff !default;',
+          'not equle'
+        )
       })
     })
   })

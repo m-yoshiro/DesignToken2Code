@@ -30,4 +30,11 @@ module.exports = class Token {
       }
     })
   }
+
+  output() {
+    const { name, value } = this.data
+    const scssVariable = `$${name}: ${value} !default;`
+
+    return scssVariable
+  }
 }
