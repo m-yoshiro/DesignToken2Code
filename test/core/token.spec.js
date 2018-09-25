@@ -3,7 +3,7 @@ const { assert } = require('chai')
 
 const Token = require('../../src/core/token')
 /* eslint-disable no-unused-vars */
-describe('Token Class:', () => {
+describe('Token', () => {
   describe('#validate()', () => {
     context('when luck "type" property', () => {
       it('Should throw ReferenceError', () => {
