@@ -31,11 +31,14 @@ module.exports = class Token {
     })
   }
 
-  output() {
-    // TODO: test `name` has `$`
-    const { name, value } = this.data
-    const scssVariable = `$${name}: ${value} !default;`
+  convertToScss() {
+    let { name } = this.data
+    const { value } = this.data
+    name = `$${name.replace(/^\$?(.*)/, '$1')}`
+    return `${name}: ${value} !default;`
+  }
 
-    return scssVariable
+  output() {
+    return this.convertToScss()
   }
 }
