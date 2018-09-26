@@ -2,9 +2,6 @@ const tokenProps = {
   type: {
     type: 'string',
   },
-  format: {
-    type: 'string',
-  },
   name: {
     type: 'string',
   },
@@ -31,14 +28,10 @@ module.exports = class Token {
     })
   }
 
-  convertToScss() {
+  outputScss() {
     let { name } = this.data
     const { value } = this.data
     name = `$${name.replace(/^\$?(.*)/, '$1')}`
     return `${name}: ${value} !default;`
-  }
-
-  output() {
-    return this.convertToScss()
   }
 }

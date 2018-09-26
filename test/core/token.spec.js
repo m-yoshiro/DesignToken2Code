@@ -4,7 +4,6 @@ const Token = require('../../src/core/token')
 
 const testToken = {
   type: 'color',
-  format: 'scss',
   name: 'token-name',
   value: '#fff',
 }
@@ -17,7 +16,6 @@ describe('Token', () => {
         assert.throws(
           () => {
             const newToken = new Token({
-              format: 'scss',
               name: 'token-name',
               value: '#fff',
             })
@@ -33,7 +31,6 @@ describe('Token', () => {
         assert.throws(() => {
           const newToken = new Token({
             type: 87,
-            format: 'scss',
             name: 'token-name',
             value: '#fff',
           })
