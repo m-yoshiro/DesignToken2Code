@@ -43,27 +43,13 @@ describe('Token', () => {
   })
 
   // TODO:
-  describe('#convertToScss()', () => {
-    context('when convert tokens to "scss" format', () => {
+  describe('#outputScss()', () => {
+    context('when output "scss" format from token ', () => {
       it('Should return scss variable', () => {
         const newToken = new Token(testToken)
 
         assert.equal(
-          newToken.output(),
-          '$token-name: #fff !default;',
-          'not equle'
-        )
-      })
-    })
-  })
-
-  describe('#output()', () => {
-    context('when output tokens', () => {
-      it('Should return scss variable', () => {
-        const newToken = new Token(testToken)
-
-        assert.equal(
-          newToken.output(),
+          newToken.outputScss(),
           '$token-name: #fff !default;',
           'not equle'
         )
