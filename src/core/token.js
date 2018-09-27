@@ -28,7 +28,7 @@ module.exports = class Token {
     })
   }
 
-  outputScss() {
+  toScss() {
     let { name } = this.data
     const { value } = this.data
     name = `$${name.replace(/^\$?(.*)/, '$1')}`

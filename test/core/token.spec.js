@@ -40,13 +40,13 @@ describe('Token', () => {
   })
 
   // TODO:
-  describe('#outputScss()', () => {
+  describe('#toScss()', () => {
     context('when output "scss" format from token ', () => {
       it('Should return scss variable', () => {
         const newToken = new Token(testToken)
 
         assert.equal(
-          newToken.outputScss(),
+          newToken.toScss(),
           '$token-name: #fff !default;',
           'not equle'
         )
