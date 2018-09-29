@@ -1,9 +1,14 @@
 const Token = require('./token')
 
 module.exports = class DesignTokens {
-  constructor(data, ...options) {
+  constructor(
+    data,
+    config = {
+      outputFormat: 'scss',
+    }
+  ) {
     this.tokens = []
-    this.options = options
+    this.config = config
     this.initTokens(data)
   }
 
@@ -17,6 +22,20 @@ module.exports = class DesignTokens {
   }
 
   output() {
-    return this.tokens.map(token => token.toScss()).join('\n')
+    const { outputFormat } = this.config
+    let outputData
+
+    switch (outputFormat) {
+      case 'scss':
+        outputData = this.tokens.map(token => token.toScss()).join('\n')
+        break
+      case 'css':
+        outputData = this.tokens.map(token => token.toCss()).join('\n')
+        break
+      default:
+        break
+    }
+
+    return outputData
   }
 }
