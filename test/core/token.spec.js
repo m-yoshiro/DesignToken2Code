@@ -39,7 +39,6 @@ describe('Token', () => {
     })
   })
 
-  // TODO:
   describe('#toScss()', () => {
     context('when output "scss" format from token ', () => {
       it('Should return scss variable', () => {
