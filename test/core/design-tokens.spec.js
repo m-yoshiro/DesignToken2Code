@@ -5,7 +5,7 @@ const DesignTokens = require('../../src/core/design-tokens')
 const testData = [
   {
     type: 'color',
-    name: 'token-name',
+    name: 'primary',
     value: '#fff',
   },
   {
@@ -38,7 +38,7 @@ describe('DesignTokens', () => {
       it('Should output must be scss variables', () => {
         assert.equal(
           Tokens.output(),
-          '$token-name: #fff !default;',
+          '$primary: #fff !default;\n$secondary: #22ff99 !default;',
           '=== $token-name: #fff !default;'
         )
       })
