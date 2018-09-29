@@ -53,5 +53,15 @@ describe('Token', () => {
       })
     })
   })
+
+  describe('#toCss()', () => {
+    context('when output "scss" format from token ', () => {
+      it('Should return css variable', () => {
+        const newToken = new Token(testToken)
+
+        assert.equal(newToken.toCss(), '--token-name: #fff;', 'not equle')
+      })
+    })
+  })
 })
 /* eslint-enable no-unused-vars */

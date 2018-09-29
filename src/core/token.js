@@ -34,4 +34,11 @@ module.exports = class Token {
     name = `$${name.replace(/^\$?(.*)/, '$1')}`
     return `${name}: ${value} !default;`
   }
+
+  toCss() {
+    let { name } = this.data
+    const { value } = this.data
+    name = `--${name.replace(/^\$?(.*)/, '$1')}`
+    return `${name}: ${value};`
+  }
 }
