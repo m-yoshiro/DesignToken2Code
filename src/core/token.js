@@ -2,9 +2,6 @@ const tokenProps = {
   type: {
     type: 'string',
   },
-  format: {
-    type: 'string',
-  },
   name: {
     type: 'string',
   },
@@ -29,5 +26,19 @@ module.exports = class Token {
         throw new TypeError(`${key} must be ${tokenProps[key].type}`)
       }
     })
+  }
+
+  toScss() {
+    let { name } = this.data
+    const { value } = this.data
+    name = `$${name.replace(/^\$?(.*)/, '$1')}`
+    return `${name}: ${value} !default;`
+  }
+
+  toCss() {
+    let { name } = this.data
+    const { value } = this.data
+    name = `--${name.replace(/^\$?(.*)/, '$1')}`
+    return `${name}: ${value};`
   }
 }
