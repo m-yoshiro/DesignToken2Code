@@ -3,16 +3,18 @@ const { UI } = require('sketch')
 const { prefix, artboardName } = require('./config')
 const { escapeRegExp } = require('./utils')
 const { createDialog, pasteBoardWrite } = require('./ui/index')
+const DesignTokens = require('./core/design-tokens')
 
 const getTokenLayersByPattern = (layers, pattern) =>
   layers.filter(
     elm => elm.type === `${sketch.Types.Shape}` && pattern.test(elm.name)
   )
 
-const generateTokensFromLayers = layers =>
+const convertLayersToTokenData = layers =>
   layers.map(elm => ({
+    type: 'color',
     name: elm.name,
-    color: elm.style.fills[0].color,
+    value: elm.style.fills[0].color,
   }))
 
 export default function(context) {
@@ -29,32 +31,32 @@ export default function(context) {
     tokensArtboard.layers,
     tokenNamePattern
   )
-  const tokens = generateTokensFromLayers(tokenLayers)
 
-  const outputData = tokens
-    .map(elm => `${elm.name}: ${elm.color};\n`)
-    .reduce((a, b) => a + b)
+  const tokenData = new DesignTokens(convertLayersToTokenData(tokenLayers))
+  const outputData = tokenData.output()
 
   // Dialog
+  const dialogButtons = [
+    {
+      text: 'Copy',
+      action: () => {
+        pasteBoardWrite(
+          {
+            data: outputData,
+            message: 'Copied',
+          },
+          context
+        )
+      },
+    },
+    {
+      text: 'Close',
+    },
+  ]
+
   createDialog({
     title: 'DesignTokens2Code',
     message: outputData,
-    buttons: [
-      {
-        text: 'Copy',
-        action: () => {
-          pasteBoardWrite(
-            {
-              data: outputData,
-              message: 'Copied',
-            },
-            context
-          )
-        },
-      },
-      {
-        text: 'Close',
-      },
-    ],
+    buttons: dialogButtons,
   })
 }
