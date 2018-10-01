@@ -17,7 +17,7 @@ const generateTokensFromLayers = layers =>
 export default function(context) {
   const document = sketch.fromNative(context.document)
   const tokensArtboard = document.getLayersNamed(artboardName)[0]
-  const tokenNamePattern = new RegExp(`^${escapeRegExp(prefix)}`)
+  const tokenNamePattern = new RegExp(`${escapeRegExp(prefix)}`)
 
   if (!tokensArtboard.layers.length) {
     UI.message('Not found')
