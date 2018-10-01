@@ -21,6 +21,10 @@ module.exports = class DesignTokens {
     return null
   }
 
+  set setOutputFormat(format) {
+    this.config.outputFormat = format
+  }
+
   output() {
     const { outputFormat } = this.config
     let outputData
