@@ -227,6 +227,12 @@ function __skpm_run(key, context) {
                     return outputData
                   },
                 },
+                {
+                  key: 'setOutputFormat',
+                  set: function set(format) {
+                    this.config.outputFormat = format
+                  },
+                },
               ])
 
               return DesignTokens
@@ -409,6 +415,7 @@ function __skpm_run(key, context) {
             var tokenData = new DesignTokens(
               convertLayersToTokenData(tokenLayers)
             )
+            tokenData.setOutputFormat = 'css'
             var outputData = tokenData.output() // Dialog
 
             var dialogButtons = [
