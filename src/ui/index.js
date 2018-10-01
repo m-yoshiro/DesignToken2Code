@@ -1,4 +1,4 @@
-module.export.createDialog = (context, title, message, buttons = []) => {
+module.exports.createDialog = ({ title, message, buttons }) => {
   const dialog = NSAlert.alloc().init()
   dialog.messageText = title
   dialog.informativeText = message
@@ -20,7 +20,7 @@ module.export.createDialog = (context, title, message, buttons = []) => {
   }
 }
 
-module.exports.paseteBoardWrite = (context, data, message = 'Copied') => {
+module.exports.pasteBoardWrite = ({ data, message = 'Copied' }, context) => {
   const pasteBoard = NSPasteboard.generalPasteboard()
   pasteBoard.clearContents()
   pasteBoard.writeObjects([data])

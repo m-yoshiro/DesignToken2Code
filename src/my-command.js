@@ -2,6 +2,7 @@ const sketch = require('sketch/dom')
 const { UI } = require('sketch')
 const { prefix, artboardName } = require('./config')
 const { escapeRegExp } = require('./utils')
+const { createDialog, pasteBoardWrite } = require('./ui/index')
 
 const getTokenLayersByPattern = (layers, pattern) =>
   layers.filter(
@@ -30,27 +31,30 @@ export default function(context) {
   )
   const tokens = generateTokensFromLayers(tokenLayers)
 
-  const message = tokens
+  const outputData = tokens
     .map(elm => `${elm.name}: ${elm.color};\n`)
     .reduce((a, b) => a + b)
 
   // Dialog
-  const dialog = NSAlert.alloc().init()
-  dialog.messageText = 'DesignTokens2Code'
-  dialog.informativeText = message
-
-  dialog.addButtonWithTitle('Copy')
-  dialog.addButtonWithTitle('Close')
-
-  // https://github.com/skpm/dialog/blob/master/lib/message-box.js#L96
-  const response = Number(dialog.runModal()) - 1000
-
-  if (response === 0) {
-    // Copy to clipboard
-    const pasteBoard = NSPasteboard.generalPasteboard()
-    pasteBoard.clearContents()
-    pasteBoard.writeObjects([message])
-
-    context.document.showMessage('Copied!')
-  }
+  createDialog({
+    title: 'DesignTokens2Code',
+    message: outputData,
+    buttons: [
+      {
+        text: 'Copy',
+        action: () => {
+          pasteBoardWrite(
+            {
+              data: outputData,
+              message: 'Copied',
+            },
+            context
+          )
+        },
+      },
+      {
+        text: 'Close',
+      },
+    ],
+  })
 }
