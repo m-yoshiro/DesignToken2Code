@@ -5,11 +5,13 @@ const { escapeRegExp } = require('./utils')
 const { createDialog, pasteBoardWrite } = require('./ui/index')
 const DesignTokens = require('./core/design-tokens')
 
+// TODO: 外部ファイルに切り出す
 const getTokenLayersByPattern = (layers, pattern) =>
   layers.filter(
     elm => elm.type === `${sketch.Types.Shape}` && pattern.test(elm.name)
   )
 
+// TODO: 外部ファイルに切り出す
 const convertLayersToTokenData = layers =>
   layers.map(elm => ({
     type: 'color',
@@ -33,6 +35,7 @@ export default function(context) {
   )
 
   const tokenData = new DesignTokens(convertLayersToTokenData(tokenLayers))
+  // TODO: UI上でformatを変更できるようにする
   tokenData.setOutputFormat = 'css'
   const outputData = tokenData.output()
 
