@@ -2,7 +2,7 @@ const sketch = require('sketch/dom')
 const { UI } = require('sketch')
 const { prefix, artboardName } = require('./config')
 const { escapeRegExp } = require('./utils')
-const { createDialog, pasteBoardWrite } = require('./ui/index')
+const { createDialog, pasteBoardWrite } = require('./sketch-ui/index')
 const DesignTokens = require('./core/design-tokens')
 
 // TODO: 外部ファイルに切り出す
