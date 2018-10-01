@@ -157,6 +157,12 @@ function __skpm_run(key, context) {
           var _require3 = __webpack_require__(/*! ./utils */ './src/utils.js'),
             escapeRegExp = _require3.escapeRegExp
 
+          var _require4 = __webpack_require__(
+              /*! ./ui/index */ './src/ui/index.js'
+            ),
+            createDialog = _require4.createDialog,
+            pasteBoardWrite = _require4.pasteBoardWrite
+
           var getTokenLayersByPattern = function getTokenLayersByPattern(
             layers,
             pattern
@@ -197,7 +203,7 @@ function __skpm_run(key, context) {
               tokenNamePattern
             )
             var tokens = generateTokensFromLayers(tokenLayers)
-            var message = tokens
+            var outputData = tokens
               .map(function(elm) {
                 return ''.concat(elm.name, ': ').concat(elm.color, ';\n')
               })
@@ -205,21 +211,70 @@ function __skpm_run(key, context) {
                 return a + b
               }) // Dialog
 
+            createDialog({
+              title: 'DesignTokens2Code',
+              message: outputData,
+              buttons: [
+                {
+                  text: 'Copy',
+                  action: function action() {
+                    pasteBoardWrite(
+                      {
+                        data: outputData,
+                        message: 'Copied',
+                      },
+                      context
+                    )
+                  },
+                },
+                {
+                  text: 'Close',
+                },
+              ],
+            })
+          }
+
+          /***/
+        },
+
+      /***/ './src/ui/index.js':
+        /*!*************************!*\
+  !*** ./src/ui/index.js ***!
+  \*************************/
+        /*! no static exports found */
+        /***/ function(module, exports) {
+          module.exports.createDialog = function(_ref) {
+            var title = _ref.title,
+              message = _ref.message,
+              buttons = _ref.buttons
             var dialog = NSAlert.alloc().init()
-            dialog.messageText = 'DesignTokens2Code'
+            dialog.messageText = title
             dialog.informativeText = message
-            dialog.addButtonWithTitle('Copy')
-            dialog.addButtonWithTitle('Close') // https://github.com/skpm/dialog/blob/master/lib/message-box.js#L96
+
+            if (Array.isArray(buttons) && buttons.length > 0) {
+              buttons.forEach(function(button) {
+                dialog.addButtonWithTitle(button.text)
+              })
+            } // https://github.com/skpm/dialog/blob/master/lib/message-box.js#L96
 
             var response = Number(dialog.runModal()) - 1000
 
-            if (response === 0) {
-              // Copy to clipboard
-              var pasteBoard = NSPasteboard.generalPasteboard()
-              pasteBoard.clearContents()
-              pasteBoard.writeObjects([message])
-              context.document.showMessage('Copied!')
+            if (
+              buttons[response].action &&
+              typeof buttons[response].action === 'function'
+            ) {
+              buttons[response].action()
             }
+          }
+
+          module.exports.pasteBoardWrite = function(_ref2, context) {
+            var data = _ref2.data,
+              _ref2$message = _ref2.message,
+              message = _ref2$message === void 0 ? 'Copied' : _ref2$message
+            var pasteBoard = NSPasteboard.generalPasteboard()
+            pasteBoard.clearContents()
+            pasteBoard.writeObjects([data])
+            context.document.showMessage(message)
           }
 
           /***/
