@@ -135,6 +135,205 @@ function __skpm_run(key, context) {
           /***/
         },
 
+      /***/ './src/core/design-tokens.js':
+        /*!***********************************!*\
+  !*** ./src/core/design-tokens.js ***!
+  \***********************************/
+        /*! no static exports found */
+        /***/ function(module, exports, __webpack_require__) {
+          function _classCallCheck(instance, Constructor) {
+            if (!(instance instanceof Constructor)) {
+              throw new TypeError('Cannot call a class as a function')
+            }
+          }
+
+          function _defineProperties(target, props) {
+            for (var i = 0; i < props.length; i++) {
+              var descriptor = props[i]
+              descriptor.enumerable = descriptor.enumerable || false
+              descriptor.configurable = true
+              if ('value' in descriptor) descriptor.writable = true
+              Object.defineProperty(target, descriptor.key, descriptor)
+            }
+          }
+
+          function _createClass(Constructor, protoProps, staticProps) {
+            if (protoProps) _defineProperties(Constructor.prototype, protoProps)
+            if (staticProps) _defineProperties(Constructor, staticProps)
+            return Constructor
+          }
+
+          var Token = __webpack_require__(/*! ./token */ './src/core/token.js')
+
+          module.exports =
+            /*#__PURE__*/
+            (function() {
+              function DesignTokens(data) {
+                var config =
+                  arguments.length > 1 && arguments[1] !== undefined
+                    ? arguments[1]
+                    : {
+                        outputFormat: 'scss',
+                      }
+
+                _classCallCheck(this, DesignTokens)
+
+                this.tokens = []
+                this.config = config
+                this.initTokens(data)
+              }
+
+              _createClass(DesignTokens, [
+                {
+                  key: 'initTokens',
+                  value: function initTokens(data) {
+                    if (!Array.isArray(data)) {
+                      return new TypeError('"data must be Array"')
+                    }
+
+                    this.tokens = data.map(function(element) {
+                      return new Token(element)
+                    })
+                    return null
+                  },
+                },
+                {
+                  key: 'output',
+                  value: function output() {
+                    var outputFormat = this.config.outputFormat
+                    var outputData
+
+                    switch (outputFormat) {
+                      case 'scss':
+                        outputData = this.tokens
+                          .map(function(token) {
+                            return token.toScss()
+                          })
+                          .join('\n')
+                        break
+
+                      case 'css':
+                        outputData = this.tokens
+                          .map(function(token) {
+                            return token.toCss()
+                          })
+                          .join('\n')
+                        break
+
+                      default:
+                        break
+                    }
+
+                    return outputData
+                  },
+                },
+              ])
+
+              return DesignTokens
+            })()
+
+          /***/
+        },
+
+      /***/ './src/core/token.js':
+        /*!***************************!*\
+  !*** ./src/core/token.js ***!
+  \***************************/
+        /*! no static exports found */
+        /***/ function(module, exports) {
+          function _classCallCheck(instance, Constructor) {
+            if (!(instance instanceof Constructor)) {
+              throw new TypeError('Cannot call a class as a function')
+            }
+          }
+
+          function _defineProperties(target, props) {
+            for (var i = 0; i < props.length; i++) {
+              var descriptor = props[i]
+              descriptor.enumerable = descriptor.enumerable || false
+              descriptor.configurable = true
+              if ('value' in descriptor) descriptor.writable = true
+              Object.defineProperty(target, descriptor.key, descriptor)
+            }
+          }
+
+          function _createClass(Constructor, protoProps, staticProps) {
+            if (protoProps) _defineProperties(Constructor.prototype, protoProps)
+            if (staticProps) _defineProperties(Constructor, staticProps)
+            return Constructor
+          }
+
+          var tokenProps = {
+            type: {
+              type: 'string',
+            },
+            name: {
+              type: 'string',
+            },
+            value: {
+              type: 'string',
+            },
+          }
+
+          module.exports =
+            /*#__PURE__*/
+            (function() {
+              function Token(data) {
+                _classCallCheck(this, Token)
+
+                this.data = data
+                this.validate()
+              }
+
+              _createClass(Token, [
+                {
+                  key: 'validate',
+                  value: function validate() {
+                    var _this = this
+
+                    Object.keys(tokenProps).forEach(function(key) {
+                      if (!(key in _this.data)) {
+                        throw new ReferenceError(
+                          'Data must have '.concat(key, ' property.')
+                        )
+                      }
+
+                      if (typeof _this.data[key] !== 'string') {
+                        throw new TypeError(
+                          ''
+                            .concat(key, ' must be ')
+                            .concat(tokenProps[key].type)
+                        )
+                      }
+                    })
+                  },
+                },
+                {
+                  key: 'toScss',
+                  value: function toScss() {
+                    var name = this.data.name
+                    var value = this.data.value
+                    name = '$'.concat(name.replace(/^\$?(.*)/, '$1'))
+                    return ''.concat(name, ': ').concat(value, ' !default;')
+                  },
+                },
+                {
+                  key: 'toCss',
+                  value: function toCss() {
+                    var name = this.data.name
+                    var value = this.data.value
+                    name = '--'.concat(name.replace(/^\$?(.*)/, '$1'))
+                    return ''.concat(name, ': ').concat(value, ';')
+                  },
+                },
+              ])
+
+              return Token
+            })()
+
+          /***/
+        },
+
       /***/ './src/my-command.js':
         /*!***************************!*\
   !*** ./src/my-command.js ***!
@@ -163,6 +362,10 @@ function __skpm_run(key, context) {
             createDialog = _require4.createDialog,
             pasteBoardWrite = _require4.pasteBoardWrite
 
+          var DesignTokens = __webpack_require__(
+            /*! ./core/design-tokens */ './src/core/design-tokens.js'
+          )
+
           var getTokenLayersByPattern = function getTokenLayersByPattern(
             layers,
             pattern
@@ -175,13 +378,14 @@ function __skpm_run(key, context) {
             })
           }
 
-          var generateTokensFromLayers = function generateTokensFromLayers(
+          var convertLayersToTokenData = function convertLayersToTokenData(
             layers
           ) {
             return layers.map(function(elm) {
               return {
+                type: 'color',
                 name: elm.name,
-                color: elm.style.fills[0].color,
+                value: elm.style.fills[0].color,
               }
             })
           }
@@ -202,35 +406,32 @@ function __skpm_run(key, context) {
               tokensArtboard.layers,
               tokenNamePattern
             )
-            var tokens = generateTokensFromLayers(tokenLayers)
-            var outputData = tokens
-              .map(function(elm) {
-                return ''.concat(elm.name, ': ').concat(elm.color, ';\n')
-              })
-              .reduce(function(a, b) {
-                return a + b
-              }) // Dialog
+            var tokenData = new DesignTokens(
+              convertLayersToTokenData(tokenLayers)
+            )
+            var outputData = tokenData.output() // Dialog
 
+            var dialogButtons = [
+              {
+                text: 'Copy',
+                action: function action() {
+                  pasteBoardWrite(
+                    {
+                      data: outputData,
+                      message: 'Copied',
+                    },
+                    context
+                  )
+                },
+              },
+              {
+                text: 'Close',
+              },
+            ]
             createDialog({
               title: 'DesignTokens2Code',
               message: outputData,
-              buttons: [
-                {
-                  text: 'Copy',
-                  action: function action() {
-                    pasteBoardWrite(
-                      {
-                        data: outputData,
-                        message: 'Copied',
-                      },
-                      context
-                    )
-                  },
-                },
-                {
-                  text: 'Close',
-                },
-              ],
+              buttons: dialogButtons,
             })
           }
 
@@ -247,11 +448,18 @@ function __skpm_run(key, context) {
             var title = _ref.title,
               message = _ref.message,
               buttons = _ref.buttons
+
+            if (title === undefined || message === undefined) {
+              throw new Error('"title" or "message" is no arguments.')
+            }
+
             var dialog = NSAlert.alloc().init()
             dialog.messageText = title
             dialog.informativeText = message
 
-            if (Array.isArray(buttons) && buttons.length > 0) {
+            if (buttons !== undefined && !Array.isArray(buttons)) {
+              throw new TypeError('"buttons" must be Array.')
+            } else if (buttons.length > 0) {
               buttons.forEach(function(button) {
                 dialog.addButtonWithTitle(button.text)
               })
@@ -271,6 +479,15 @@ function __skpm_run(key, context) {
             var data = _ref2.data,
               _ref2$message = _ref2.message,
               message = _ref2$message === void 0 ? 'Copied' : _ref2$message
+
+            if (data === undefined) {
+              throw new Error('"data" is not exist')
+            }
+
+            if (context.document.type === 'Document') {
+              throw new TypeError('"context" must be Sketch/dom')
+            }
+
             var pasteBoard = NSPasteboard.generalPasteboard()
             pasteBoard.clearContents()
             pasteBoard.writeObjects([data])
