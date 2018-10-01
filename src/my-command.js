@@ -33,6 +33,7 @@ export default function(context) {
   )
 
   const tokenData = new DesignTokens(convertLayersToTokenData(tokenLayers))
+  tokenData.setOutputFormat = 'css'
   const outputData = tokenData.output()
 
   // Dialog
