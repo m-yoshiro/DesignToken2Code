@@ -1,3 +1,5 @@
+const sketch = require('sketch/dom')
+
 module.exports.createDialog = ({ title, message, buttons }) => {
   if (title === undefined || message === undefined) {
     throw new Error('"title" or "message" is no arguments.')
@@ -41,3 +43,15 @@ module.exports.pasteBoardWrite = ({ data, message = 'Copied' }, context) => {
 
   context.document.showMessage(message)
 }
+
+module.exports.getTokenLayersByPattern = (layers, pattern) =>
+  layers.filter(
+    elm => elm.type === `${sketch.Types.Shape}` && pattern.test(elm.name)
+  )
+
+module.exports.convertLayersToTokenData = layers =>
+  layers.map(elm => ({
+    type: 'color',
+    name: elm.name,
+    value: elm.style.fills[0].color,
+  }))

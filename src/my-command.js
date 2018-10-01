@@ -2,22 +2,13 @@ const sketch = require('sketch/dom')
 const { UI } = require('sketch')
 const { prefix, artboardName } = require('./config')
 const { escapeRegExp } = require('./utils')
-const { createDialog, pasteBoardWrite } = require('./ui/index')
 const DesignTokens = require('./core/design-tokens')
-
-// TODO: 外部ファイルに切り出す
-const getTokenLayersByPattern = (layers, pattern) =>
-  layers.filter(
-    elm => elm.type === `${sketch.Types.Shape}` && pattern.test(elm.name)
-  )
-
-// TODO: 外部ファイルに切り出す
-const convertLayersToTokenData = layers =>
-  layers.map(elm => ({
-    type: 'color',
-    name: elm.name,
-    value: elm.style.fills[0].color,
-  }))
+const {
+  createDialog,
+  pasteBoardWrite,
+  getTokenLayersByPattern,
+  convertLayersToTokenData,
+} = require('./sketch-ui/index')
 
 export default function(context) {
   const document = sketch.fromNative(context.document)
