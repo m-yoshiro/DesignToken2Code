@@ -1,9 +1,15 @@
 module.exports.createDialog = ({ title, message, buttons }) => {
+  if (title === undefined || message === undefined) {
+    throw new Error('"title" or "message" is no arguments.')
+  }
+
   const dialog = NSAlert.alloc().init()
   dialog.messageText = title
   dialog.informativeText = message
 
-  if (Array.isArray(buttons) && buttons.length > 0) {
+  if (buttons !== undefined && !Array.isArray(buttons)) {
+    throw new TypeError('"buttons" must be Array.')
+  } else if (buttons.length > 0) {
     buttons.forEach(button => {
       dialog.addButtonWithTitle(button.text)
     })
@@ -21,6 +27,14 @@ module.exports.createDialog = ({ title, message, buttons }) => {
 }
 
 module.exports.pasteBoardWrite = ({ data, message = 'Copied' }, context) => {
+  if (data === undefined) {
+    throw new Error('"data" is not exist')
+  }
+
+  if (context.document.type === 'Document') {
+    throw new TypeError('"context" must be Sketch/dom')
+  }
+
   const pasteBoard = NSPasteboard.generalPasteboard()
   pasteBoard.clearContents()
   pasteBoard.writeObjects([data])
