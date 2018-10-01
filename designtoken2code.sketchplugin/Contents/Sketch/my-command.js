@@ -362,39 +362,17 @@ function __skpm_run(key, context) {
           var _require3 = __webpack_require__(/*! ./utils */ './src/utils.js'),
             escapeRegExp = _require3.escapeRegExp
 
-          var _require4 = __webpack_require__(
-              /*! ./ui/index */ './src/ui/index.js'
-            ),
-            createDialog = _require4.createDialog,
-            pasteBoardWrite = _require4.pasteBoardWrite
-
           var DesignTokens = __webpack_require__(
             /*! ./core/design-tokens */ './src/core/design-tokens.js'
           )
 
-          var getTokenLayersByPattern = function getTokenLayersByPattern(
-            layers,
-            pattern
-          ) {
-            return layers.filter(function(elm) {
-              return (
-                elm.type === ''.concat(sketch.Types.Shape) &&
-                pattern.test(elm.name)
-              )
-            })
-          }
-
-          var convertLayersToTokenData = function convertLayersToTokenData(
-            layers
-          ) {
-            return layers.map(function(elm) {
-              return {
-                type: 'color',
-                name: elm.name,
-                value: elm.style.fills[0].color,
-              }
-            })
-          }
+          var _require4 = __webpack_require__(
+              /*! ./sketch-ui/index */ './src/sketch-ui/index.js'
+            ),
+            createDialog = _require4.createDialog,
+            pasteBoardWrite = _require4.pasteBoardWrite,
+            getTokenLayersByPattern = _require4.getTokenLayersByPattern,
+            convertLayersToTokenData = _require4.convertLayersToTokenData
 
           /* harmony default export */ __webpack_exports__[
             'default'
@@ -414,7 +392,8 @@ function __skpm_run(key, context) {
             )
             var tokenData = new DesignTokens(
               convertLayersToTokenData(tokenLayers)
-            )
+            ) // TODO: UI上でformatを変更できるようにする
+
             tokenData.setOutputFormat = 'css'
             var outputData = tokenData.output() // Dialog
 
@@ -445,12 +424,14 @@ function __skpm_run(key, context) {
           /***/
         },
 
-      /***/ './src/ui/index.js':
-        /*!*************************!*\
-  !*** ./src/ui/index.js ***!
-  \*************************/
+      /***/ './src/sketch-ui/index.js':
+        /*!********************************!*\
+  !*** ./src/sketch-ui/index.js ***!
+  \********************************/
         /*! no static exports found */
-        /***/ function(module, exports) {
+        /***/ function(module, exports, __webpack_require__) {
+          var sketch = __webpack_require__(/*! sketch/dom */ 'sketch/dom')
+
           module.exports.createDialog = function(_ref) {
             var title = _ref.title,
               message = _ref.message,
@@ -499,6 +480,25 @@ function __skpm_run(key, context) {
             pasteBoard.clearContents()
             pasteBoard.writeObjects([data])
             context.document.showMessage(message)
+          }
+
+          module.exports.getTokenLayersByPattern = function(layers, pattern) {
+            return layers.filter(function(elm) {
+              return (
+                elm.type === ''.concat(sketch.Types.Shape) &&
+                pattern.test(elm.name)
+              )
+            })
+          }
+
+          module.exports.convertLayersToTokenData = function(layers) {
+            return layers.map(function(elm) {
+              return {
+                type: 'color',
+                name: elm.name,
+                value: elm.style.fills[0].color,
+              }
+            })
           }
 
           /***/
