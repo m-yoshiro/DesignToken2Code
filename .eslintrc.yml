@@ -124,6 +124,7 @@ globals:
   MSImmutableSymbolMaster: false
   MSImmutableTextLayer: false
   MSImmutableDocumentData: false
+  NSUTF8StringEncoding: false
 
 parserOptions:
   sourceType: module

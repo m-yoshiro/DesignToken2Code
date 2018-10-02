@@ -55,3 +55,10 @@ module.exports.convertLayersToTokenData = layers =>
     name: elm.name,
     value: elm.style.fills[0].color,
   }))
+
+module.exports.writeToFile = (data, path) => {
+  const file = NSString.stringWithString(data)
+  file.writeToFile(path)
+  file.automatically(true)
+  file.encoding(NSUTF8StringEncoding)
+}
