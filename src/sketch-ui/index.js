@@ -58,7 +58,10 @@ module.exports.convertLayersToTokenData = layers =>
 
 module.exports.writeToFile = (data, path) => {
   const file = NSString.stringWithString(data)
+  const errorHandle = error => log(error)
+
   file.writeToFile(path)
   file.automatically(true)
   file.encoding(NSUTF8StringEncoding)
+  file.error(log(errorHandle))
 }
