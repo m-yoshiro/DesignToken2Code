@@ -49,6 +49,7 @@ export default function(context) {
     {
       text: 'Save',
       action: () => {
+        // TODO: 保存先を選択できるようにする
         writeToFile('/Users/yoshiro/Desktop/color.css', `${outputData}`)
       },
     },
