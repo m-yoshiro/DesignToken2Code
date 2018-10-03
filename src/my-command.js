@@ -8,6 +8,7 @@ const {
   pasteBoardWrite,
   getTokenLayersByPattern,
   convertLayersToTokenData,
+  writeToFile,
 } = require('./sketch-ui/index')
 
 export default function(context) {
@@ -35,6 +36,7 @@ export default function(context) {
     {
       text: 'Copy',
       action: () => {
+        writeToFile('/Users/yoshiro/Desktop/color.css', outputData)
         pasteBoardWrite(
           {
             data: outputData,
