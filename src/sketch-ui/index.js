@@ -45,8 +45,9 @@ module.exports.pasteBoardWrite = ({ data, message = 'Copied' }, context) => {
 }
 
 module.exports.getTokenLayersByPattern = (layers, pattern) =>
+  // TODO: layerのtypeが正しいかtest追加する
   layers.filter(
-    elm => elm.type === `${sketch.Types.Shape}` && pattern.test(elm.name)
+    elm => elm.type === `${sketch.Types.ShapePath}` && pattern.test(elm.name)
   )
 
 module.exports.convertLayersToTokenData = layers =>
