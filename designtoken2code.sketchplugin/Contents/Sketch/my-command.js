@@ -372,7 +372,8 @@ function __skpm_run(key, context) {
             createDialog = _require4.createDialog,
             pasteBoardWrite = _require4.pasteBoardWrite,
             getTokenLayersByPattern = _require4.getTokenLayersByPattern,
-            convertLayersToTokenData = _require4.convertLayersToTokenData
+            convertLayersToTokenData = _require4.convertLayersToTokenData,
+            writeToFile = _require4.writeToFile
 
           /* harmony default export */ __webpack_exports__[
             'default'
@@ -390,11 +391,11 @@ function __skpm_run(key, context) {
               tokensArtboard.layers,
               tokenNamePattern
             )
+            log(''.concat(sketch.Types.Shape))
             var tokenData = new DesignTokens(
               convertLayersToTokenData(tokenLayers)
             ) // TODO: UI上でformatを変更できるようにする
 
-            tokenData.setOutputFormat = 'css'
             var outputData = tokenData.output() // Dialog
 
             var dialogButtons = [
@@ -407,6 +408,15 @@ function __skpm_run(key, context) {
                       message: 'Copied',
                     },
                     context
+                  )
+                },
+              },
+              {
+                text: 'Save',
+                action: function action() {
+                  writeToFile(
+                    '/Users/yoshiro/Desktop/color.css',
+                    ''.concat(outputData)
                   )
                 },
               },
@@ -483,12 +493,15 @@ function __skpm_run(key, context) {
           }
 
           module.exports.getTokenLayersByPattern = function(layers, pattern) {
-            return layers.filter(function(elm) {
-              return (
-                elm.type === ''.concat(sketch.Types.Shape) &&
-                pattern.test(elm.name)
-              )
-            })
+            return (
+              // TODO: layerのtypeが正しいかtest追加する
+              layers.filter(function(elm) {
+                return (
+                  elm.type === ''.concat(sketch.Types.ShapePath) &&
+                  pattern.test(elm.name)
+                )
+              })
+            )
           }
 
           module.exports.convertLayersToTokenData = function(layers) {
@@ -499,6 +512,12 @@ function __skpm_run(key, context) {
                 value: elm.style.fills[0].color,
               }
             })
+          }
+
+          module.exports.writeToFile = function(path, content) {
+            var file = NSString.stringWithFormat('%@', content)
+            log(path)
+            return file.writeToFile_atomically(path, true)
           }
 
           /***/
