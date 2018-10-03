@@ -26,9 +26,10 @@ export default function(context) {
     tokenNamePattern
   )
 
+  log(`${sketch.Types.Shape}`)
+
   const tokenData = new DesignTokens(convertLayersToTokenData(tokenLayers))
   // TODO: UI上でformatを変更できるようにする
-  tokenData.setOutputFormat = 'css'
   const outputData = tokenData.output()
 
   // Dialog
@@ -36,7 +37,6 @@ export default function(context) {
     {
       text: 'Copy',
       action: () => {
-        writeToFile('/Users/yoshiro/Desktop/color.css', outputData)
         pasteBoardWrite(
           {
             data: outputData,
@@ -44,6 +44,12 @@ export default function(context) {
           },
           context
         )
+      },
+    },
+    {
+      text: 'Save',
+      action: () => {
+        writeToFile('/Users/yoshiro/Desktop/color.css', `${outputData}`)
       },
     },
     {
