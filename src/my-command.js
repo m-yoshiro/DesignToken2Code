@@ -11,6 +11,10 @@ const {
   writeToFile,
 } = require('./sketch-ui/index')
 
+const CONFIG = {
+  outputFormat: 'scss',
+}
+
 export default function(context) {
   const document = sketch.fromNative(context.document)
   const tokensArtboard = document.getLayersNamed(artboardName)[0]
@@ -30,7 +34,10 @@ export default function(context) {
 
   const tokenData = new DesignTokens(convertLayersToTokenData(tokenLayers))
   // TODO: UI上でformatを変更できるようにする
+  tokenData.setOutputFormat = CONFIG.outputFormat
+
   const outputData = tokenData.output()
+  const outputFilePath = `/Users/yoshiro/Desktop/color.${CONFIG.outputFormat}`
 
   // Dialog
   const dialogButtons = [
@@ -50,7 +57,7 @@ export default function(context) {
       text: 'Save',
       action: () => {
         // TODO: 保存先を選択できるようにする
-        writeToFile('/Users/yoshiro/Desktop/color.css', `${outputData}`)
+        writeToFile(outputFilePath, `${outputData}`)
       },
     },
     {
