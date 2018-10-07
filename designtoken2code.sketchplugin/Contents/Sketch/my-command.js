@@ -401,8 +401,7 @@ function __skpm_run(key, context) {
             ) // TODO: UI上でformatを変更できるようにする
 
             tokenData.setOutputFormat = CONFIG.outputFormat
-            var outputData = tokenData.output() // const outputFilePath = `/Users/yoshiro/Desktop/color.${CONFIG.outputFormat}`
-            // Dialog
+            var outputData = tokenData.output() // Dialog
 
             var dialogButtons = [
               {
@@ -418,9 +417,8 @@ function __skpm_run(key, context) {
                 },
               },
               {
-                text: 'Save',
+                text: 'Save as',
                 action: function action() {
-                  // TODO: 保存先を選択できるようにする
                   openPanel(function(filePath) {
                     writeToFile(
                       ''
