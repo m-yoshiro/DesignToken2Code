@@ -125,6 +125,7 @@ globals:
   MSImmutableTextLayer: false
   MSImmutableDocumentData: false
   NSUTF8StringEncoding: false
+  NSFileHandlingPanelOKButton: false
 
 parserOptions:
   sourceType: module
