@@ -373,8 +373,12 @@ function __skpm_run(key, context) {
             pasteBoardWrite = _require4.pasteBoardWrite,
             getTokenLayersByPattern = _require4.getTokenLayersByPattern,
             convertLayersToTokenData = _require4.convertLayersToTokenData,
-            writeToFile = _require4.writeToFile
+            writeToFile = _require4.writeToFile,
+            openPanel = _require4.openPanel
 
+          var CONFIG = {
+            outputFormat: 'scss',
+          }
           /* harmony default export */ __webpack_exports__[
             'default'
           ] = function(context) {
@@ -396,7 +400,9 @@ function __skpm_run(key, context) {
               convertLayersToTokenData(tokenLayers)
             ) // TODO: UI上でformatを変更できるようにする
 
-            var outputData = tokenData.output() // Dialog
+            tokenData.setOutputFormat = CONFIG.outputFormat
+            var outputData = tokenData.output() // const outputFilePath = `/Users/yoshiro/Desktop/color.${CONFIG.outputFormat}`
+            // Dialog
 
             var dialogButtons = [
               {
@@ -414,10 +420,15 @@ function __skpm_run(key, context) {
               {
                 text: 'Save',
                 action: function action() {
-                  writeToFile(
-                    '/Users/yoshiro/Desktop/color.css',
-                    ''.concat(outputData)
-                  )
+                  // TODO: 保存先を選択できるようにする
+                  openPanel(function(filePath) {
+                    writeToFile(
+                      ''
+                        .concat(filePath, '/color.')
+                        .concat(CONFIG.outputFormat),
+                      ''.concat(outputData)
+                    )
+                  })
                 },
               },
               {
@@ -440,6 +451,8 @@ function __skpm_run(key, context) {
   \********************************/
         /*! no static exports found */
         /***/ function(module, exports, __webpack_require__) {
+          var _this = this
+
           var sketch = __webpack_require__(/*! sketch/dom */ 'sketch/dom')
 
           module.exports.createDialog = function(_ref) {
@@ -516,8 +529,26 @@ function __skpm_run(key, context) {
 
           module.exports.writeToFile = function(path, content) {
             var file = NSString.stringWithFormat('%@', content)
-            log(path)
             return file.writeToFile_atomically(path, true)
+          }
+
+          module.exports.openPanel = function(callback) {
+            var panel = NSOpenPanel.openPanel()
+            panel.canChooseDirectories = true
+            panel.canCreateDirectories = true
+            panel.allowsMultipleSelection = false
+            var clicked = panel.runModal()
+
+            if (clicked === NSFileHandlingPanelOKButton) {
+              var firstURL = panel.URL().path()
+              var filePath = NSString.stringWithFormat('%@', firstURL)
+
+              if (filePath.indexOf('file://') === 0) {
+                filePath = filePath.substring(7)
+              }
+
+              callback.bind(_this, filePath)()
+            }
           }
 
           /***/
