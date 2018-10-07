@@ -8,7 +8,13 @@ const {
   pasteBoardWrite,
   getTokenLayersByPattern,
   convertLayersToTokenData,
+  writeToFile,
+  openPanel,
 } = require('./sketch-ui/index')
+
+const CONFIG = {
+  outputFormat: 'scss',
+}
 
 export default function(context) {
   const document = sketch.fromNative(context.document)
@@ -25,9 +31,11 @@ export default function(context) {
     tokenNamePattern
   )
 
+  log(`${sketch.Types.Shape}`)
+
   const tokenData = new DesignTokens(convertLayersToTokenData(tokenLayers))
   // TODO: UI上でformatを変更できるようにする
-  tokenData.setOutputFormat = 'css'
+  tokenData.setOutputFormat = CONFIG.outputFormat
   const outputData = tokenData.output()
 
   // Dialog
@@ -42,6 +50,17 @@ export default function(context) {
           },
           context
         )
+      },
+    },
+    {
+      text: 'Save as',
+      action: () => {
+        openPanel(filePath => {
+          writeToFile(
+            `${filePath}/color.${CONFIG.outputFormat}`,
+            `${outputData}`
+          )
+        })
       },
     },
     {

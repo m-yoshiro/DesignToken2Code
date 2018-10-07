@@ -45,8 +45,9 @@ module.exports.pasteBoardWrite = ({ data, message = 'Copied' }, context) => {
 }
 
 module.exports.getTokenLayersByPattern = (layers, pattern) =>
+  // TODO: layerのtypeが正しいかtest追加する
   layers.filter(
-    elm => elm.type === `${sketch.Types.Shape}` && pattern.test(elm.name)
+    elm => elm.type === `${sketch.Types.ShapePath}` && pattern.test(elm.name)
   )
 
 module.exports.convertLayersToTokenData = layers =>
@@ -55,3 +56,28 @@ module.exports.convertLayersToTokenData = layers =>
     name: elm.name,
     value: elm.style.fills[0].color,
   }))
+
+module.exports.writeToFile = (path, content) => {
+  const file = NSString.stringWithFormat('%@', content)
+  return file.writeToFile_atomically(path, true)
+}
+
+module.exports.openPanel = callback => {
+  const panel = NSOpenPanel.openPanel()
+  panel.canChooseDirectories = true
+  panel.canCreateDirectories = true
+  panel.allowsMultipleSelection = false
+
+  const clicked = panel.runModal()
+
+  if (clicked === NSFileHandlingPanelOKButton) {
+    const firstURL = panel.URL().path()
+    let filePath = NSString.stringWithFormat('%@', firstURL)
+
+    if (filePath.indexOf('file://') === 0) {
+      filePath = filePath.substring(7)
+    }
+
+    callback.bind(this, filePath)()
+  }
+}

@@ -372,8 +372,13 @@ function __skpm_run(key, context) {
             createDialog = _require4.createDialog,
             pasteBoardWrite = _require4.pasteBoardWrite,
             getTokenLayersByPattern = _require4.getTokenLayersByPattern,
-            convertLayersToTokenData = _require4.convertLayersToTokenData
+            convertLayersToTokenData = _require4.convertLayersToTokenData,
+            writeToFile = _require4.writeToFile,
+            openPanel = _require4.openPanel
 
+          var CONFIG = {
+            outputFormat: 'scss',
+          }
           /* harmony default export */ __webpack_exports__[
             'default'
           ] = function(context) {
@@ -390,11 +395,12 @@ function __skpm_run(key, context) {
               tokensArtboard.layers,
               tokenNamePattern
             )
+            log(''.concat(sketch.Types.Shape))
             var tokenData = new DesignTokens(
               convertLayersToTokenData(tokenLayers)
             ) // TODO: UI上でformatを変更できるようにする
 
-            tokenData.setOutputFormat = 'css'
+            tokenData.setOutputFormat = CONFIG.outputFormat
             var outputData = tokenData.output() // Dialog
 
             var dialogButtons = [
@@ -408,6 +414,19 @@ function __skpm_run(key, context) {
                     },
                     context
                   )
+                },
+              },
+              {
+                text: 'Save as',
+                action: function action() {
+                  openPanel(function(filePath) {
+                    writeToFile(
+                      ''
+                        .concat(filePath, '/color.')
+                        .concat(CONFIG.outputFormat),
+                      ''.concat(outputData)
+                    )
+                  })
                 },
               },
               {
@@ -430,6 +449,8 @@ function __skpm_run(key, context) {
   \********************************/
         /*! no static exports found */
         /***/ function(module, exports, __webpack_require__) {
+          var _this = this
+
           var sketch = __webpack_require__(/*! sketch/dom */ 'sketch/dom')
 
           module.exports.createDialog = function(_ref) {
@@ -483,12 +504,15 @@ function __skpm_run(key, context) {
           }
 
           module.exports.getTokenLayersByPattern = function(layers, pattern) {
-            return layers.filter(function(elm) {
-              return (
-                elm.type === ''.concat(sketch.Types.Shape) &&
-                pattern.test(elm.name)
-              )
-            })
+            return (
+              // TODO: layerのtypeが正しいかtest追加する
+              layers.filter(function(elm) {
+                return (
+                  elm.type === ''.concat(sketch.Types.ShapePath) &&
+                  pattern.test(elm.name)
+                )
+              })
+            )
           }
 
           module.exports.convertLayersToTokenData = function(layers) {
@@ -499,6 +523,30 @@ function __skpm_run(key, context) {
                 value: elm.style.fills[0].color,
               }
             })
+          }
+
+          module.exports.writeToFile = function(path, content) {
+            var file = NSString.stringWithFormat('%@', content)
+            return file.writeToFile_atomically(path, true)
+          }
+
+          module.exports.openPanel = function(callback) {
+            var panel = NSOpenPanel.openPanel()
+            panel.canChooseDirectories = true
+            panel.canCreateDirectories = true
+            panel.allowsMultipleSelection = false
+            var clicked = panel.runModal()
+
+            if (clicked === NSFileHandlingPanelOKButton) {
+              var firstURL = panel.URL().path()
+              var filePath = NSString.stringWithFormat('%@', firstURL)
+
+              if (filePath.indexOf('file://') === 0) {
+                filePath = filePath.substring(7)
+              }
+
+              callback.bind(_this, filePath)()
+            }
           }
 
           /***/
