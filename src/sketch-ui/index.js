@@ -59,7 +59,25 @@ module.exports.convertLayersToTokenData = layers =>
 
 module.exports.writeToFile = (path, content) => {
   const file = NSString.stringWithFormat('%@', content)
-  log(path)
-
   return file.writeToFile_atomically(path, true)
+}
+
+module.exports.openPanel = callback => {
+  const panel = NSOpenPanel.openPanel()
+  panel.canChooseDirectories = true
+  panel.canCreateDirectories = true
+  panel.allowsMultipleSelection = false
+
+  const clicked = panel.runModal()
+
+  if (clicked === NSFileHandlingPanelOKButton) {
+    const firstURL = panel.URL().path()
+    let filePath = NSString.stringWithFormat('%@', firstURL)
+
+    if (filePath.indexOf('file://') === 0) {
+      filePath = filePath.substring(7)
+    }
+
+    callback.bind(this, filePath)()
+  }
 }

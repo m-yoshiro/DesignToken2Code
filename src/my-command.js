@@ -9,6 +9,7 @@ const {
   getTokenLayersByPattern,
   convertLayersToTokenData,
   writeToFile,
+  openPanel,
 } = require('./sketch-ui/index')
 
 const CONFIG = {
@@ -37,7 +38,7 @@ export default function(context) {
   tokenData.setOutputFormat = CONFIG.outputFormat
 
   const outputData = tokenData.output()
-  const outputFilePath = `/Users/yoshiro/Desktop/color.${CONFIG.outputFormat}`
+  // const outputFilePath = `/Users/yoshiro/Desktop/color.${CONFIG.outputFormat}`
 
   // Dialog
   const dialogButtons = [
@@ -57,7 +58,12 @@ export default function(context) {
       text: 'Save',
       action: () => {
         // TODO: 保存先を選択できるようにする
-        writeToFile(outputFilePath, `${outputData}`)
+        openPanel(filePath => {
+          writeToFile(
+            `${filePath}/color.${CONFIG.outputFormat}`,
+            `${outputData}`
+          )
+        })
       },
     },
     {
