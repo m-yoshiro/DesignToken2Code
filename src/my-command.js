@@ -36,9 +36,7 @@ export default function(context) {
   const tokenData = new DesignTokens(convertLayersToTokenData(tokenLayers))
   // TODO: UI上でformatを変更できるようにする
   tokenData.setOutputFormat = CONFIG.outputFormat
-
   const outputData = tokenData.output()
-  // const outputFilePath = `/Users/yoshiro/Desktop/color.${CONFIG.outputFormat}`
 
   // Dialog
   const dialogButtons = [
@@ -55,9 +53,8 @@ export default function(context) {
       },
     },
     {
-      text: 'Save',
+      text: 'Save as',
       action: () => {
-        // TODO: 保存先を選択できるようにする
         openPanel(filePath => {
           writeToFile(
             `${filePath}/color.${CONFIG.outputFormat}`,
