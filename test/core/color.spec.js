@@ -6,15 +6,24 @@ const Color = require('../../src/core/color')
 describe('Color', () => {
   describe('#toHEX()', () => {
     context('when color data is #fff', () => {
+      const TestColor = new Color('#fff')
+
+      it('Should return string', () => {
+        assert.typeOf(TestColor.toHEX(), 'string', 'output is string')
+      })
       it('Should output hex color', () => {
-        assert.equal(
-          () => {
-            const TestColor = new Color('#fff')
-            return TestColor.toHEX()
-          },
-          '#fff',
-          'must equal'
-        )
+        assert.equal(TestColor.toHEX(), 'fff', 'must be equal')
+      })
+    })
+
+    context('when color data is #000000', () => {
+      const TestColor = new Color('#000000')
+
+      it('Should return string', () => {
+        assert.typeOf(TestColor.toHEX(), 'string', 'output is string')
+      })
+      it('Should output hex color', () => {
+        assert.equal(TestColor.toHEX(), '000000', 'must be equal')
       })
     })
   })
