@@ -26,6 +26,20 @@ describe('Color', () => {
         assert.equal(TestColor.toHEX(), '000000', 'must be equal')
       })
     })
+
+    context('when color data has alpha', () => {
+      const TestColor = new Color('#000000ff')
+
+      it('Should return string', () => {
+        assert.typeOf(TestColor.toHEX(), 'string', 'output is string')
+      })
+      it('Should output hex color', () => {
+        assert.equal(TestColor.toHEX(), '000000', 'must be equal')
+      })
+      it('Should not has alpha', () => {
+        assert.notEqual(TestColor.toHEX(), '000000ff', 'must not has alpha')
+      })
+    })
   })
 })
 /* eslint-enable no-unused-vars */
