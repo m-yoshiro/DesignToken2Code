@@ -495,11 +495,15 @@ function __skpm_run(key, context) {
               /*! ./sketch-ui/index */ './src/sketch-ui/index.js'
             ),
             createDialog = _require4.createDialog,
-            pasteBoardWrite = _require4.pasteBoardWrite,
-            getTokenLayersByPattern = _require4.getTokenLayersByPattern,
-            convertLayersToTokenData = _require4.convertLayersToTokenData,
-            writeToFile = _require4.writeToFile,
             openPanel = _require4.openPanel
+
+          var _require5 = __webpack_require__(
+              /*! ./sketch-ui/utils */ './src/sketch-ui/utils.js'
+            ),
+            pasteBoardWrite = _require5.pasteBoardWrite,
+            getTokenLayersByPattern = _require5.getTokenLayersByPattern,
+            convertLayersToTokenData = _require5.convertLayersToTokenData,
+            writeToFile = _require5.writeToFile
 
           var CONFIG = {
             outputFormat: 'scss',
@@ -573,10 +577,8 @@ function __skpm_run(key, context) {
   !*** ./src/sketch-ui/index.js ***!
   \********************************/
         /*! no static exports found */
-        /***/ function(module, exports, __webpack_require__) {
+        /***/ function(module, exports) {
           var _this = this
-
-          var sketch = __webpack_require__(/*! sketch/dom */ 'sketch/dom')
 
           module.exports.createDialog = function(_ref) {
             var title = _ref.title,
@@ -609,10 +611,40 @@ function __skpm_run(key, context) {
             }
           }
 
-          module.exports.pasteBoardWrite = function(_ref2, context) {
-            var data = _ref2.data,
-              _ref2$message = _ref2.message,
-              message = _ref2$message === void 0 ? 'Copied' : _ref2$message
+          module.exports.openPanel = function(callback) {
+            var panel = NSOpenPanel.openPanel()
+            panel.canChooseDirectories = true
+            panel.canCreateDirectories = true
+            panel.allowsMultipleSelection = false
+            var clicked = panel.runModal()
+
+            if (clicked === NSFileHandlingPanelOKButton) {
+              var firstURL = panel.URL().path()
+              var filePath = NSString.stringWithFormat('%@', firstURL)
+
+              if (filePath.indexOf('file://') === 0) {
+                filePath = filePath.substring(7)
+              }
+
+              callback.bind(_this, filePath)()
+            }
+          }
+
+          /***/
+        },
+
+      /***/ './src/sketch-ui/utils.js':
+        /*!********************************!*\
+  !*** ./src/sketch-ui/utils.js ***!
+  \********************************/
+        /*! no static exports found */
+        /***/ function(module, exports, __webpack_require__) {
+          var sketch = __webpack_require__(/*! sketch/dom */ 'sketch/dom')
+
+          module.exports.pasteBoardWrite = function(_ref, context) {
+            var data = _ref.data,
+              _ref$message = _ref.message,
+              message = _ref$message === void 0 ? 'Copied' : _ref$message
 
             if (data === undefined) {
               throw new Error('"data" is not exist')
@@ -653,25 +685,6 @@ function __skpm_run(key, context) {
           module.exports.writeToFile = function(path, content) {
             var file = NSString.stringWithFormat('%@', content)
             return file.writeToFile_atomically(path, true)
-          }
-
-          module.exports.openPanel = function(callback) {
-            var panel = NSOpenPanel.openPanel()
-            panel.canChooseDirectories = true
-            panel.canCreateDirectories = true
-            panel.allowsMultipleSelection = false
-            var clicked = panel.runModal()
-
-            if (clicked === NSFileHandlingPanelOKButton) {
-              var firstURL = panel.URL().path()
-              var filePath = NSString.stringWithFormat('%@', firstURL)
-
-              if (filePath.indexOf('file://') === 0) {
-                filePath = filePath.substring(7)
-              }
-
-              callback.bind(_this, filePath)()
-            }
           }
 
           /***/

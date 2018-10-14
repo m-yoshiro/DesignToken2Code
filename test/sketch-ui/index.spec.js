@@ -1,6 +1,7 @@
 /* global describe:false, it:false, context:false */
 const { assert } = require('chai')
-const { createDialog, pasteBoardWrite } = require('../../src/sketch-ui')
+const { createDialog } = require('../../src/sketch-ui/index')
+const { pasteBoardWrite } = require('../../src/sketch-ui/utils')
 
 /* eslint-disable no-unused-vars */
 describe('UI', () => {
