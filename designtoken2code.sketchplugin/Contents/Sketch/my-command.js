@@ -135,6 +135,119 @@ function __skpm_run(key, context) {
           /***/
         },
 
+      /***/ './src/core/color.js':
+        /*!***************************!*\
+  !*** ./src/core/color.js ***!
+  \***************************/
+        /*! no static exports found */
+        /***/ function(module, exports) {
+          function _slicedToArray(arr, i) {
+            return (
+              _arrayWithHoles(arr) ||
+              _iterableToArrayLimit(arr, i) ||
+              _nonIterableRest()
+            )
+          }
+
+          function _nonIterableRest() {
+            throw new TypeError(
+              'Invalid attempt to destructure non-iterable instance'
+            )
+          }
+
+          function _iterableToArrayLimit(arr, i) {
+            var _arr = []
+            var _n = true
+            var _d = false
+            var _e = undefined
+            try {
+              for (
+                var _i = arr[Symbol.iterator](), _s;
+                !(_n = (_s = _i.next()).done);
+                _n = true
+              ) {
+                _arr.push(_s.value)
+                if (i && _arr.length === i) break
+              }
+            } catch (err) {
+              _d = true
+              _e = err
+            } finally {
+              try {
+                if (!_n && _i['return'] != null) _i['return']()
+              } finally {
+                if (_d) throw _e
+              }
+            }
+            return _arr
+          }
+
+          function _arrayWithHoles(arr) {
+            if (Array.isArray(arr)) return arr
+          }
+
+          function _classCallCheck(instance, Constructor) {
+            if (!(instance instanceof Constructor)) {
+              throw new TypeError('Cannot call a class as a function')
+            }
+          }
+
+          function _defineProperties(target, props) {
+            for (var i = 0; i < props.length; i++) {
+              var descriptor = props[i]
+              descriptor.enumerable = descriptor.enumerable || false
+              descriptor.configurable = true
+              if ('value' in descriptor) descriptor.writable = true
+              Object.defineProperty(target, descriptor.key, descriptor)
+            }
+          }
+
+          function _createClass(Constructor, protoProps, staticProps) {
+            if (protoProps) _defineProperties(Constructor.prototype, protoProps)
+            if (staticProps) _defineProperties(Constructor, staticProps)
+            return Constructor
+          }
+
+          module.exports =
+            /*#__PURE__*/
+            (function() {
+              function Color(value) {
+                _classCallCheck(this, Color)
+
+                this.value = value
+              }
+
+              _createClass(Color, [
+                {
+                  key: 'toHEX',
+                  value: function toHEX() {
+                    // https://gist.github.com/comficker/871d378c535854c1c460f7867a191a5a#gistcomment-2615849
+                    var hexPattern = /^#?(?:([0-9a-f]{3})|([0-9a-f]{6})(?:[0-9a-f]{2})?)$/i
+
+                    var _ref = this.value.match(hexPattern) || [],
+                      _ref2 = _slicedToArray(_ref, 3),
+                      short = _ref2[1],
+                      long = _ref2[2]
+
+                    if (long) {
+                      return '#'.concat(long)
+                    }
+
+                    if (short) {
+                      return '#'.concat(short)
+                    }
+
+                    return undefined
+                  },
+                },
+              ])
+
+              return Color
+            })()
+
+          /***/
+        },
+
       /***/ './src/core/design-tokens.js':
         /*!***********************************!*\
   !*** ./src/core/design-tokens.js ***!
@@ -246,7 +359,7 @@ function __skpm_run(key, context) {
   !*** ./src/core/token.js ***!
   \***************************/
         /*! no static exports found */
-        /***/ function(module, exports) {
+        /***/ function(module, exports, __webpack_require__) {
           function _classCallCheck(instance, Constructor) {
             if (!(instance instanceof Constructor)) {
               throw new TypeError('Cannot call a class as a function')
@@ -269,6 +382,8 @@ function __skpm_run(key, context) {
             return Constructor
           }
 
+          var Color = __webpack_require__(/*! ./color */ './src/core/color.js')
+
           var tokenProps = {
             type: {
               type: 'string',
@@ -289,6 +404,10 @@ function __skpm_run(key, context) {
 
                 this.data = data
                 this.validate()
+
+                if (this.data.type === 'color') {
+                  this.color = new Color(this.data.value)
+                }
               }
 
               _createClass(Token, [
@@ -317,8 +436,11 @@ function __skpm_run(key, context) {
                 {
                   key: 'toScss',
                   value: function toScss() {
-                    var name = this.data.name
-                    var value = this.data.value
+                    var _this$data = this.data,
+                      name = _this$data.name,
+                      value = _this$data.value
+                    var type = this.data.type
+                    value = type === 'color' ? new Color(value).toHEX() : value
                     name = '$'.concat(name.replace(/^\$?(.*)/, '$1'))
                     return ''.concat(name, ': ').concat(value, ' !default;')
                   },
@@ -326,8 +448,11 @@ function __skpm_run(key, context) {
                 {
                   key: 'toCss',
                   value: function toCss() {
-                    var name = this.data.name
-                    var value = this.data.value
+                    var _this$data2 = this.data,
+                      name = _this$data2.name,
+                      value = _this$data2.value
+                    var type = this.data.type
+                    value = type === 'color' ? new Color(value).toHEX() : value
                     name = '--'.concat(name.replace(/^\$?(.*)/, '$1'))
                     return ''.concat(name, ': ').concat(value, ';')
                   },

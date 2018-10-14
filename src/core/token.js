@@ -1,3 +1,5 @@
+const Color = require('./color')
+
 const tokenProps = {
   type: {
     type: 'string',
@@ -14,6 +16,10 @@ module.exports = class Token {
   constructor(data) {
     this.data = data
     this.validate()
+
+    if (this.data.type === 'color') {
+      this.color = new Color(this.data.value)
+    }
   }
 
   validate() {
@@ -29,15 +35,19 @@ module.exports = class Token {
   }
 
   toScss() {
-    let { name } = this.data
-    const { value } = this.data
+    let { name, value } = this.data
+    const { type } = this.data
+
+    value = type === 'color' ? new Color(value).toHEX() : value
     name = `$${name.replace(/^\$?(.*)/, '$1')}`
     return `${name}: ${value} !default;`
   }
 
   toCss() {
-    let { name } = this.data
-    const { value } = this.data
+    let { name, value } = this.data
+    const { type } = this.data
+
+    value = type === 'color' ? new Color(value).toHEX() : value
     name = `--${name.replace(/^\$?(.*)/, '$1')}`
     return `${name}: ${value};`
   }
