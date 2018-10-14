@@ -577,10 +577,8 @@ function __skpm_run(key, context) {
   !*** ./src/sketch-ui/index.js ***!
   \********************************/
         /*! no static exports found */
-        /***/ function(module, exports, __webpack_require__) {
+        /***/ function(module, exports) {
           var _this = this
-
-          var sketch = __webpack_require__(/*! sketch/dom */ 'sketch/dom')
 
           module.exports.createDialog = function(_ref) {
             var title = _ref.title,
@@ -640,7 +638,9 @@ function __skpm_run(key, context) {
   !*** ./src/sketch-ui/utils.js ***!
   \********************************/
         /*! no static exports found */
-        /***/ function(module, exports) {
+        /***/ function(module, exports, __webpack_require__) {
+          var sketch = __webpack_require__(/*! sketch/dom */ 'sketch/dom')
+
           module.exports.pasteBoardWrite = function(_ref, context) {
             var data = _ref.data,
               _ref$message = _ref.message,
