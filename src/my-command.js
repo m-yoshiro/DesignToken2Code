@@ -3,14 +3,13 @@ const { UI } = require('sketch')
 const { prefix, artboardName } = require('./config')
 const { escapeRegExp } = require('./utils')
 const DesignTokens = require('./core/design-tokens')
+const { createDialog, openPanel } = require('./sketch-ui/index')
 const {
-  createDialog,
   pasteBoardWrite,
   getTokenLayersByPattern,
   convertLayersToTokenData,
   writeToFile,
-  openPanel,
-} = require('./sketch-ui/index')
+} = require('./sketch-ui/utils')
 
 const CONFIG = {
   outputFormat: 'scss',
