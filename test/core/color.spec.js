@@ -12,7 +12,7 @@ describe('Color', () => {
         assert.typeOf(TestColor.toHEX(), 'string', 'output is string')
       })
       it('Should output hex color', () => {
-        assert.equal(TestColor.toHEX(), 'fff', 'must be equal')
+        assert.equal(TestColor.toHEX(), '#fff', 'must be equal')
       })
     })
 
@@ -23,7 +23,7 @@ describe('Color', () => {
         assert.typeOf(TestColor.toHEX(), 'string', 'output is string')
       })
       it('Should output hex color', () => {
-        assert.equal(TestColor.toHEX(), '000000', 'must be equal')
+        assert.equal(TestColor.toHEX(), '#000000', 'must be equal')
       })
     })
 
@@ -34,10 +34,10 @@ describe('Color', () => {
         assert.typeOf(TestColor.toHEX(), 'string', 'output is string')
       })
       it('Should output hex color', () => {
-        assert.equal(TestColor.toHEX(), '000000', 'must be equal')
+        assert.equal(TestColor.toHEX(), '#000000', 'must be equal')
       })
       it('Should not has alpha', () => {
-        assert.notEqual(TestColor.toHEX(), '000000ff', 'must not has alpha')
+        assert.notEqual(TestColor.toHEX(), '#000000ff', 'must not has alpha')
       })
     })
   })
