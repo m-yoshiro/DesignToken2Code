@@ -25,6 +25,20 @@ module.exports.getTokenLayersByPattern = (layers, pattern) =>
         elm.type === `${sketch.Types.SymbolInstance}`)
   )
 
+// TODO: Symbolからcolorを取得するする
+// 関数の記述場所を要検討
+module.exports.getSymbolMaster = layer => {
+  if (layer.type === `${sketch.Types.SymbolMaster}`) {
+    return layer
+  }
+
+  if (layer.type === `${sketch.Types.SymbolInstance}`) {
+    return layer.master
+  }
+
+  return null
+}
+
 module.exports.convertLayersToTokenData = layers =>
   layers.map(elm => ({
     type: 'color',
