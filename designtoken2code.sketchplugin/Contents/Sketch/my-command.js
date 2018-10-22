@@ -665,11 +665,25 @@ function __skpm_run(key, context) {
               // TODO: layerのtypeが正しいかtest追加する
               layers.filter(function(elm) {
                 return (
-                  elm.type === ''.concat(sketch.Types.ShapePath) &&
-                  pattern.test(elm.name)
+                  pattern.test(elm.name) &&
+                  (elm.type === ''.concat(sketch.Types.ShapePath) ||
+                    elm.type === ''.concat(sketch.Types.SymbolInstance))
                 )
               })
             )
+          } // TODO: Symbolからcolorを取得するする
+          // 関数の記述場所を要検討
+
+          module.exports.getSymbolMaster = function(layer) {
+            if (layer.type === ''.concat(sketch.Types.SymbolMaster)) {
+              return layer
+            }
+
+            if (layer.type === ''.concat(sketch.Types.SymbolInstance)) {
+              return layer.master
+            }
+
+            return null
           }
 
           module.exports.convertLayersToTokenData = function(layers) {
