@@ -1,4 +1,6 @@
 const sketch = require('sketch/dom')
+// Tokenとして扱うことのできる Layer Typeを指定
+const tokenLayerTypes = [`${sketch.Types.ShapePath}`]
 
 module.exports.pasteBoardWrite = ({ data, message = 'Copied' }, context) => {
   if (data === undefined) {
@@ -18,15 +20,19 @@ module.exports.pasteBoardWrite = ({ data, message = 'Copied' }, context) => {
 
 module.exports.getTokenLayersByPattern = (layers, pattern) =>
   // TODO: layerのtypeが正しいかtest追加する
-  layers.filter(
-    elm => elm.type === `${sketch.Types.ShapePath}` && pattern.test(elm.name)
-  )
+  layers.filter(elm => {
+    if (!pattern.test(elm.name)) {
+      return false
+    }
+
+    return tokenLayerTypes.some(type => type === elm.type)
+  })
 
 module.exports.convertLayersToTokenData = layers =>
-  layers.map(elm => ({
+  layers.map(layer => ({
     type: 'color',
-    name: elm.name,
-    value: elm.style.fills[0].color,
+    name: layer.name,
+    value: layer.style.fills[0].color,
   }))
 
 module.exports.writeToFile = (path, content) => {

@@ -639,7 +639,9 @@ function __skpm_run(key, context) {
   \********************************/
         /*! no static exports found */
         /***/ function(module, exports, __webpack_require__) {
-          var sketch = __webpack_require__(/*! sketch/dom */ 'sketch/dom')
+          var sketch = __webpack_require__(/*! sketch/dom */ 'sketch/dom') // Tokenとして扱うことのできる Layer Typeを指定
+
+          var tokenLayerTypes = [''.concat(sketch.Types.ShapePath)]
 
           module.exports.pasteBoardWrite = function(_ref, context) {
             var data = _ref.data,
@@ -664,20 +666,23 @@ function __skpm_run(key, context) {
             return (
               // TODO: layerのtypeが正しいかtest追加する
               layers.filter(function(elm) {
-                return (
-                  elm.type === ''.concat(sketch.Types.ShapePath) &&
-                  pattern.test(elm.name)
-                )
+                if (!pattern.test(elm.name)) {
+                  return false
+                }
+
+                return tokenLayerTypes.some(function(type) {
+                  return type === elm.type
+                })
               })
             )
           }
 
           module.exports.convertLayersToTokenData = function(layers) {
-            return layers.map(function(elm) {
+            return layers.map(function(layer) {
               return {
                 type: 'color',
-                name: elm.name,
-                value: elm.style.fills[0].color,
+                name: layer.name,
+                value: layer.style.fills[0].color,
               }
             })
           }
