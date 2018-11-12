@@ -1,10 +1,6 @@
 const sketch = require('sketch/dom')
-
-const tokenLayerTypes = [
-  `${sketch.Types.ShapePath}`,
-  `${sketch.Types.SymbolInstance}`,
-  `${sketch.Types.SymbolMaster}`,
-]
+// Tokenとして扱うことのできる Layer Typeを指定
+const tokenLayerTypes = [`${sketch.Types.ShapePath}`]
 
 module.exports.pasteBoardWrite = ({ data, message = 'Copied' }, context) => {
   if (data === undefined) {
@@ -32,25 +28,11 @@ module.exports.getTokenLayersByPattern = (layers, pattern) =>
     return tokenLayerTypes.some(type => type === elm.type)
   })
 
-// TODO: Symbolからcolorを取得するする
-// 関数の記述場所を要検討
-module.exports.getSymbolMaster = layer => {
-  if (layer.type === `${sketch.Types.SymbolMaster}`) {
-    return layer
-  }
-
-  if (layer.type === `${sketch.Types.SymbolInstance}`) {
-    return layer.master
-  }
-
-  return null
-}
-
 module.exports.convertLayersToTokenData = layers =>
-  layers.map(elm => ({
+  layers.map(layer => ({
     type: 'color',
-    name: elm.name,
-    value: elm.style.fills[0].color,
+    name: layer.name,
+    value: layer.style.fills[0].color,
   }))
 
 module.exports.writeToFile = (path, content) => {
