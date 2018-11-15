@@ -21,6 +21,10 @@ module.exports.pasteBoardWrite = ({ data, message = 'Copied' }, context) => {
 module.exports.getTokenLayersByPattern = (layers, pattern) =>
   // TODO: layerのtypeが正しいかtest追加する
   layers.filter(elm => {
+    if (elm.layers && elm.layers.length) {
+      // Do recursive func
+    }
+
     if (!pattern.test(elm.name)) {
       return false
     }
