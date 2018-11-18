@@ -18,19 +18,22 @@ module.exports.pasteBoardWrite = ({ data, message = 'Copied' }, context) => {
   context.document.showMessage(message)
 }
 
-module.exports.getTokenLayersByPattern = (layers, pattern) =>
-  // TODO: layerのtypeが正しいかtest追加する
-  layers.filter(elm => {
-    if (elm.layers && elm.layers.length) {
-      // Do recursive func
-    }
+module.exports.extractTokenLayersByPattern = (object, pattern) => {
+  // eslint-disable-next-line no-shadow
+  const recursiveSearch = object => {
+    if (object.layers && object.layers.length) {
+      recursiveSearch(object)
+    } else if (Array.isArray(object)) {
+      object.filter(layer => {
+        if (!pattern.test(layer.name)) {
+          return false
+        }
 
-    if (!pattern.test(elm.name)) {
-      return false
+        return tokenLayerTypes.some(type => type === object.type)
+      })
     }
-
-    return tokenLayerTypes.some(type => type === elm.type)
-  })
+  }
+}
 
 module.exports.convertLayersToTokenData = layers =>
   layers.map(layer => ({
