@@ -30,7 +30,9 @@ module.exports.extractTokenLayersByPattern = (object, pattern) => {
 
     if (
       pattern.test(object.name) &&
-      tokenLayerTypes.some(type => type === object.type)
+      tokenLayerTypes.some(type => type === object.type) &&
+      object.style.fills &&
+      object.style.fills.length
     ) {
       tokenLayers.push(object)
     }
