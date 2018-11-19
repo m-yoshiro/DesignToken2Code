@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const sketch = require('sketch/dom')
 // Tokenとして扱うことのできる Layer Typeを指定
 const tokenLayerTypes = [`${sketch.Types.ShapePath}`]
@@ -19,20 +20,25 @@ module.exports.pasteBoardWrite = ({ data, message = 'Copied' }, context) => {
 }
 
 module.exports.extractTokenLayersByPattern = (object, pattern) => {
+  const tokenLayers = []
+
   // eslint-disable-next-line no-shadow
   const recursiveSearch = object => {
     if (object.layers && object.layers.length) {
-      recursiveSearch(object)
-    } else if (Array.isArray(object)) {
-      object.filter(layer => {
-        if (!pattern.test(layer.name)) {
-          return false
-        }
+      object.layers.forEach(recursiveSearch)
+    }
 
-        return tokenLayerTypes.some(type => type === object.type)
-      })
+    if (
+      pattern.test(object.name) &&
+      tokenLayerTypes.some(type => type === object.type)
+    ) {
+      tokenLayers.push(object)
     }
   }
+
+  recursiveSearch(object)
+
+  return tokenLayers
 }
 
 module.exports.convertLayersToTokenData = layers =>

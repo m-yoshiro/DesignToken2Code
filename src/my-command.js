@@ -26,11 +26,11 @@ export default function(context) {
   }
 
   const tokenLayers = extractTokenLayersByPattern(
-    tokensArtboard.layers,
+    tokensArtboard,
     tokenNamePattern
   )
 
-  log(`${sketch.Types.Shape}`)
+  log(tokenLayers)
 
   const tokenData = new DesignTokens(convertLayersToTokenData(tokenLayers))
   // TODO: UI上でformatを変更できるようにする
