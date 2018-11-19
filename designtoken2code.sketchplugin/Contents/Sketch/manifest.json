@@ -4,15 +4,15 @@
   "icon": "icon.png",
   "commands": [
     {
-      "name": "my-command",
-      "identifier": "my-command-identifier",
-      "script": "my-command.js"
+      "name": "Run DesignToken2Code",
+      "identifier": "run",
+      "script": "designtoken2code.js"
     }
   ],
   "menu": {
     "title": "DesignToken2Code",
     "items": [
-      "my-command-identifier"
+      "run"
     ]
   },
   "version": "0.1.0",
