@@ -501,7 +501,7 @@ function __skpm_run(key, context) {
               /*! ./sketch-ui/utils */ './src/sketch-ui/utils.js'
             ),
             pasteBoardWrite = _require5.pasteBoardWrite,
-            getTokenLayersByPattern = _require5.getTokenLayersByPattern,
+            extractTokenLayersByPattern = _require5.extractTokenLayersByPattern,
             convertLayersToTokenData = _require5.convertLayersToTokenData,
             writeToFile = _require5.writeToFile
 
@@ -520,11 +520,11 @@ function __skpm_run(key, context) {
               return
             }
 
-            var tokenLayers = getTokenLayersByPattern(
-              tokensArtboard.layers,
+            var tokenLayers = extractTokenLayersByPattern(
+              tokensArtboard,
               tokenNamePattern
             )
-            log(''.concat(sketch.Types.Shape))
+            log(tokenLayers)
             var tokenData = new DesignTokens(
               convertLayersToTokenData(tokenLayers)
             ) // TODO: UI上でformatを変更できるようにする
@@ -639,6 +639,7 @@ function __skpm_run(key, context) {
   \********************************/
         /*! no static exports found */
         /***/ function(module, exports, __webpack_require__) {
+          /* eslint-disable consistent-return */
           var sketch = __webpack_require__(/*! sketch/dom */ 'sketch/dom') // Tokenとして扱うことのできる Layer Typeを指定
 
           var tokenLayerTypes = [''.concat(sketch.Types.ShapePath)]
@@ -662,19 +663,31 @@ function __skpm_run(key, context) {
             context.document.showMessage(message)
           }
 
-          module.exports.getTokenLayersByPattern = function(layers, pattern) {
-            return (
-              // TODO: layerのtypeが正しいかtest追加する
-              layers.filter(function(elm) {
-                if (!pattern.test(elm.name)) {
-                  return false
-                }
+          module.exports.extractTokenLayersByPattern = function(
+            object,
+            pattern
+          ) {
+            var tokenLayers = [] // eslint-disable-next-line no-shadow
 
-                return tokenLayerTypes.some(function(type) {
-                  return type === elm.type
-                })
-              })
-            )
+            var recursiveSearch = function recursiveSearch(object) {
+              if (object.layers && object.layers.length) {
+                object.layers.forEach(recursiveSearch)
+              }
+
+              if (
+                pattern.test(object.name) &&
+                tokenLayerTypes.some(function(type) {
+                  return type === object.type
+                }) &&
+                object.style.fills &&
+                object.style.fills.length
+              ) {
+                tokenLayers.push(object)
+              }
+            }
+
+            recursiveSearch(object)
+            return tokenLayers
           }
 
           module.exports.convertLayersToTokenData = function(layers) {
