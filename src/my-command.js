@@ -6,7 +6,7 @@ const DesignTokens = require('./core/design-tokens')
 const { createDialog, openPanel } = require('./sketch-ui/index')
 const {
   pasteBoardWrite,
-  getTokenLayersByPattern,
+  extractTokenLayersByPattern,
   convertLayersToTokenData,
   writeToFile,
 } = require('./sketch-ui/utils')
@@ -25,12 +25,12 @@ export default function(context) {
     return
   }
 
-  const tokenLayers = getTokenLayersByPattern(
-    tokensArtboard.layers,
+  const tokenLayers = extractTokenLayersByPattern(
+    tokensArtboard,
     tokenNamePattern
   )
 
-  log(`${sketch.Types.Shape}`)
+  log(tokenLayers)
 
   const tokenData = new DesignTokens(convertLayersToTokenData(tokenLayers))
   // TODO: UI上でformatを変更できるようにする
