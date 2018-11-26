@@ -6,6 +6,8 @@ _This plugin was created using `skpm`. For a detailed explanation on how things 
 
 ## Installation
 
+- [Download](https://github.com/m-yoshiro/DesignToken2Code/releases)
+
 ## Usage
 
 1. Add artboard and name `Tokens`.
