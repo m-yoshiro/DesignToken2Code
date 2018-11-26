@@ -15,11 +15,11 @@
       "run"
     ]
   },
-  "version": "0.1.0",
+  "version": "0.0.2-0",
+  "description": "Convert design tokens to SCSS variables as code",
   "name": "DesignToken2Code",
   "identifier": "DesignToken2Code",
   "disableCocoaScriptPreprocessor": true,
-  "appcast": "https://raw.githubusercontent.com//master/.appcast.xml",
-  "author": "m-yoshiro",
-  "authorEmail": "massugu.massugu@gmail.com"
+  "appcast": "https://raw.githubusercontent.com/m-yoshiro/DesignToken2Code/master/.appcast.xml",
+  "author": "m-yoshiro"
 }
