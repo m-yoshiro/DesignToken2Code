@@ -34,6 +34,7 @@ export default function(context) {
 
   const tokenData = new DesignTokens(convertLayersToTokenData(tokenLayers))
   // TODO: UI上でformatを変更できるようにする
+  // 現在はSCSSに固定している
   tokenData.setOutputFormat = CONFIG.outputFormat
   const outputData = tokenData.output()
 
