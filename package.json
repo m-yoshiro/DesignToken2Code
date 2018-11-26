@@ -1,6 +1,9 @@
 {
   "name": "designtoken2code",
-  "version": "0.1.0",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": "https://github.com/m-yoshiro/DesignToken2Code",
+  "description": "Convert design tokens to SCSS variables as code",
   "engines": {
     "sketch": ">=3.0"
   },
