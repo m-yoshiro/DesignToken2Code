@@ -1,6 +1,7 @@
 {
   "name": "designtoken2code",
-  "version": "0.1.0",
+  "version": "0.0.1",
+  "license": "MIT",
   "engines": {
     "sketch": ">=3.0"
   },
