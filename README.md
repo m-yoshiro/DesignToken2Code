@@ -20,3 +20,7 @@ _This plugin was created using `skpm`. For a detailed explanation on how things 
 ## Development
 
 See [development.md](./docs/development.md).
+
+## LICENSE
+
+[MIT](./LICENSE)
