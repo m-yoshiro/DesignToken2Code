@@ -4,6 +4,8 @@ DesignToken2Code is a SketchPluing that convert Shape as a color token to code s
 
 _This plugin was created using `skpm`. For a detailed explanation on how things work, checkout the [skpm Readme](https://github.com/skpm/skpm/blob/master/README.md)._
 
+![image](./docs/play.gif)
+
 ## Installation
 
 - [Download](https://github.com/m-yoshiro/DesignToken2Code/releases)
