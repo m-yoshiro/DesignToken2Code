@@ -9,6 +9,8 @@ _This plugin was created using `skpm`. For a detailed explanation on how things 
 ## Installation
 
 - [Download](https://github.com/m-yoshiro/DesignToken2Code/releases)
+- Install with Sketch Runner  
+With Sketch Runner, just go to the `install` command and search for `DesignToken2Code`. Runner allows you to manage plugins and do much more to speed up your workflow in Sketch. [Download Runner here](http://www.sketchrunner.com).
 
 ## Usage
 
