@@ -1,6 +1,6 @@
 # DesignToken2Code
 
-DesignToken2Code is a SketchPluing that convert Shape as a color token to code such as scss variables.
+DesignToken2Code is a Sketch Plug that converts shapes color using as design token to code such as scss variables.
 
 _This plugin was created using `skpm`. For a detailed explanation on how things work, checkout the [skpm Readme](https://github.com/skpm/skpm/blob/master/README.md)._
 
