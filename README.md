@@ -19,6 +19,8 @@ With Sketch Runner, just go to the `install` command and search for `DesignToken
 1. Rename shapes `$color-xxx`.(xxx is specific words which you need)
 1. Run `DesignToken2Code` command.
 
+[📦 Sample data](./samples)
+
 ## Development
 
 See [development.md](./docs/development.md).
