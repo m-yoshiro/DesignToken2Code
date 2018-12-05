@@ -6,6 +6,12 @@ _This plugin was created using `skpm`. For a detailed explanation on how things 
 
 ![image](./docs/play.gif)
 
+## Why?
+
+I want a workflow that make easy to maintain relation between design and code.  
+
+More detail (in Japanese): https://note.mu/yoshizukin/n/n7c48af8cdbee
+
 ## Installation
 
 - [Download](https://github.com/m-yoshiro/DesignToken2Code/releases)
