@@ -7,6 +7,18 @@ module.exports.createDialog = ({ title, message, buttons }) => {
   dialog.messageText = title
   dialog.informativeText = message
 
+  const viewWidth = 350
+  const viewHeight = 300
+
+  const accessoryView = NSView.alloc().init()
+  accessoryView.setFlipped(true)
+  accessoryView.setFrame(NSMakeRect(0, 0, viewWidth, viewHeight))
+
+  const scrollView = NSScrollView.alloc().initWithFrame(
+    NSMakeRect(0, 0, viewWidth, viewHeight)
+  )
+  scrollView.setHasVerticalScroller(true)
+
   if (buttons !== undefined && !Array.isArray(buttons)) {
     throw new TypeError('"buttons" must be Array.')
   } else if (buttons.length > 0) {

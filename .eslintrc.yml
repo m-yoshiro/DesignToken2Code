@@ -127,6 +127,7 @@ globals:
   NSUTF8StringEncoding: false
   NSFileHandlingPanelOKButton: false
   NSScrollView: false
+  NSView: false
 
 parserOptions:
   sourceType: module
