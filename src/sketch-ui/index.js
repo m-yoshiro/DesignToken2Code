@@ -15,9 +15,13 @@ module.exports.createDialog = ({ title, message, buttons }) => {
   accessoryView.setFrame(NSMakeRect(0, 0, viewWidth, viewHeight))
 
   const scrollView = NSScrollView.alloc().initWithFrame(
-    NSMakeRect(0, 0, viewWidth, viewHeight)
+    NSMakeRect(0, 0, viewWidth, viewHeight - 30)
   )
   scrollView.setHasVerticalScroller(true)
+  scrollView.setBorderType(NSBezelBorder)
+  accessoryView.addSubview(scrollView)
+
+  dialog.setAccessoryView(scrollView)
 
   if (buttons !== undefined && !Array.isArray(buttons)) {
     throw new TypeError('"buttons" must be Array.')
