@@ -10,6 +10,11 @@ module.exports.createDialog = ({ title, message, buttons }) => {
   const viewWidth = 350
   const viewHeight = 300
 
+  const theTextView = NSTextView.alloc().initWithFrame(
+    NSMakeRect(0, 0, viewWidth, viewHeight)
+  )
+  theTextView.setString(message)
+
   const accessoryView = NSView.alloc().init()
   accessoryView.setFlipped(true)
   accessoryView.setFrame(NSMakeRect(0, 0, viewWidth, viewHeight))
@@ -19,6 +24,8 @@ module.exports.createDialog = ({ title, message, buttons }) => {
   )
   scrollView.setHasVerticalScroller(true)
   scrollView.setBorderType(NSBezelBorder)
+  scrollView.setDocumentView(theTextView)
+
   accessoryView.addSubview(scrollView)
 
   dialog.setAccessoryView(scrollView)

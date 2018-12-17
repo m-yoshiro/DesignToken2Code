@@ -129,6 +129,8 @@ globals:
   NSScrollView: false
   NSView: false
   NSBezelBorder: false
+  NSAttributedString: false
+  NSTextView: false
 
 parserOptions:
   sourceType: module

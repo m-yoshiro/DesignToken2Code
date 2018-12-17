@@ -595,6 +595,10 @@ function __skpm_run(key, context) {
             dialog.informativeText = message
             var viewWidth = 350
             var viewHeight = 300
+            var theTextView = NSTextView.alloc().initWithFrame(
+              NSMakeRect(0, 0, viewWidth, viewHeight)
+            )
+            theTextView.setString(message)
             var accessoryView = NSView.alloc().init()
             accessoryView.setFlipped(true)
             accessoryView.setFrame(NSMakeRect(0, 0, viewWidth, viewHeight))
@@ -603,6 +607,7 @@ function __skpm_run(key, context) {
             )
             scrollView.setHasVerticalScroller(true)
             scrollView.setBorderType(NSBezelBorder)
+            scrollView.setDocumentView(theTextView)
             accessoryView.addSubview(scrollView)
             dialog.setAccessoryView(scrollView)
 
