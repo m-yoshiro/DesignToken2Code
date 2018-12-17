@@ -6,40 +6,53 @@
 /**
  * Create Dialog.
  * @param {string} title - the title of the dialog
- * @param {string} message - the message of the dialog.
+ * @param {string} message - the message of the dialog by using informativeText.
+ * @param {string} contentText - the contentText
  * @param {array} buttons - the buttons of the dialog.
  */
-module.exports.createDialog = ({ title, message, buttons }) => {
-  if (title === undefined || message === undefined) {
+module.exports.createDialog = ({ title, message, contentText, buttons }) => {
+  if (
+    title === undefined ||
+    (message === undefined && contentText === undefined)
+  ) {
     throw new Error('"title" or "message" is no arguments.')
   }
 
-  const dialog = NSAlert.alloc().init()
-  dialog.messageText = title
-  // dialog.informativeText = message
-
+  // Content View sizes
   const viewWidth = 350
   const viewHeight = 300
 
-  const theTextView = NSTextView.alloc().initWithFrame(
-    NSMakeRect(0, 0, viewWidth, viewHeight)
-  )
-  theTextView.setString(message)
+  const dialog = NSAlert.alloc().init()
+  dialog.messageText = title
 
-  const accessoryView = NSView.alloc().init()
-  accessoryView.setFlipped(true)
-  accessoryView.setFrame(NSMakeRect(0, 0, viewWidth, viewHeight))
+  if (message) {
+    dialog.informativeText = message
+  }
 
-  const scrollView = NSScrollView.alloc().initWithFrame(
-    NSMakeRect(0, 0, viewWidth, viewHeight - 30)
-  )
-  scrollView.setHasVerticalScroller(true)
-  scrollView.setBorderType(NSBezelBorder)
-  scrollView.setDocumentView(theTextView)
+  if (contentText) {
+    const theTextView = NSTextView.alloc().initWithFrame(
+      NSMakeRect(0, 0, viewWidth, viewHeight)
+    )
+    const scrollView = NSScrollView.alloc().initWithFrame(
+      NSMakeRect(0, 0, viewWidth, viewHeight - 30)
+    )
+    const accessoryView = NSView.alloc().init()
 
-  accessoryView.addSubview(scrollView)
+    // Insert contentText
+    theTextView.setString(contentText)
 
-  dialog.setAccessoryView(scrollView)
+    // Put contentText into scrollView
+    scrollView.setHasVerticalScroller(true)
+    scrollView.setBorderType(NSBezelBorder)
+    scrollView.setDocumentView(theTextView)
+
+    // Put scrollView into accessoryView
+    accessoryView.setFlipped(true)
+    accessoryView.setFrame(NSMakeRect(0, 0, viewWidth, viewHeight))
+    accessoryView.addSubview(scrollView)
+
+    dialog.setAccessoryView(scrollView)
+  }
 
   if (buttons !== undefined && !Array.isArray(buttons)) {
     throw new TypeError('"buttons" must be Array.')

@@ -565,7 +565,7 @@ function __skpm_run(key, context) {
             ]
             createDialog({
               title: 'DesignTokens2Code',
-              message: outputData,
+              contentText: outputData,
               buttons: dialogButtons,
             })
           }
@@ -581,35 +581,60 @@ function __skpm_run(key, context) {
         /***/ function(module, exports) {
           var _this = this
 
+          /**
+           * Module for SketchUI.
+           * @module SketchUI
+           */
+
+          /**
+           * Create Dialog.
+           * @param {string} title - the title of the dialog
+           * @param {string} message - the message of the dialog by using informativeText.
+           * @param {string} contentText - the contentText
+           * @param {array} buttons - the buttons of the dialog.
+           */
           module.exports.createDialog = function(_ref) {
             var title = _ref.title,
               message = _ref.message,
+              contentText = _ref.contentText,
               buttons = _ref.buttons
 
-            if (title === undefined || message === undefined) {
+            if (
+              title === undefined ||
+              (message === undefined && contentText === undefined)
+            ) {
               throw new Error('"title" or "message" is no arguments.')
-            }
-
-            var dialog = NSAlert.alloc().init()
-            dialog.messageText = title // dialog.informativeText = message
+            } // Content View sizes
 
             var viewWidth = 350
             var viewHeight = 300
-            var theTextView = NSTextView.alloc().initWithFrame(
-              NSMakeRect(0, 0, viewWidth, viewHeight)
-            )
-            theTextView.setString(message)
-            var accessoryView = NSView.alloc().init()
-            accessoryView.setFlipped(true)
-            accessoryView.setFrame(NSMakeRect(0, 0, viewWidth, viewHeight))
-            var scrollView = NSScrollView.alloc().initWithFrame(
-              NSMakeRect(0, 0, viewWidth, viewHeight - 30)
-            )
-            scrollView.setHasVerticalScroller(true)
-            scrollView.setBorderType(NSBezelBorder)
-            scrollView.setDocumentView(theTextView)
-            accessoryView.addSubview(scrollView)
-            dialog.setAccessoryView(scrollView)
+            var dialog = NSAlert.alloc().init()
+            dialog.messageText = title
+
+            if (message) {
+              dialog.informativeText = message
+            }
+
+            if (contentText) {
+              var theTextView = NSTextView.alloc().initWithFrame(
+                NSMakeRect(0, 0, viewWidth, viewHeight)
+              )
+              var scrollView = NSScrollView.alloc().initWithFrame(
+                NSMakeRect(0, 0, viewWidth, viewHeight - 30)
+              )
+              var accessoryView = NSView.alloc().init() // Insert contentText
+
+              theTextView.setString(contentText) // Put contentText into scrollView
+
+              scrollView.setHasVerticalScroller(true)
+              scrollView.setBorderType(NSBezelBorder)
+              scrollView.setDocumentView(theTextView) // Put scrollView into accessoryView
+
+              accessoryView.setFlipped(true)
+              accessoryView.setFrame(NSMakeRect(0, 0, viewWidth, viewHeight))
+              accessoryView.addSubview(scrollView)
+              dialog.setAccessoryView(scrollView)
+            }
 
             if (buttons !== undefined && !Array.isArray(buttons)) {
               throw new TypeError('"buttons" must be Array.')
@@ -628,6 +653,10 @@ function __skpm_run(key, context) {
               buttons[response].action()
             }
           }
+          /**
+           * Open Panel.
+           * @param {function} callback - Callback will run after opening panel.
+           */
 
           module.exports.openPanel = function(callback) {
             var panel = NSOpenPanel.openPanel()
