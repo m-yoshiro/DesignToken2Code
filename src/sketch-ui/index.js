@@ -1,3 +1,14 @@
+/**
+ * Module for SketchUI.
+ * @module SketchUI
+ */
+
+/**
+ * Create Dialog.
+ * @param {string} title - the title of the dialog
+ * @param {string} message - the message of the dialog.
+ * @param {array} buttons - the buttons of the dialog.
+ */
 module.exports.createDialog = ({ title, message, buttons }) => {
   if (title === undefined || message === undefined) {
     throw new Error('"title" or "message" is no arguments.')
@@ -49,6 +60,10 @@ module.exports.createDialog = ({ title, message, buttons }) => {
   }
 }
 
+/**
+ * Open Panel.
+ * @param {function} callback - Callback will run after opening panel.
+ */
 module.exports.openPanel = callback => {
   const panel = NSOpenPanel.openPanel()
   panel.canChooseDirectories = true
