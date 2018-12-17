@@ -591,8 +591,8 @@ function __skpm_run(key, context) {
             }
 
             var dialog = NSAlert.alloc().init()
-            dialog.messageText = title
-            dialog.informativeText = message
+            dialog.messageText = title // dialog.informativeText = message
+
             var viewWidth = 350
             var viewHeight = 300
             var theTextView = NSTextView.alloc().initWithFrame(

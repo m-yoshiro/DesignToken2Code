@@ -5,7 +5,7 @@ module.exports.createDialog = ({ title, message, buttons }) => {
 
   const dialog = NSAlert.alloc().init()
   dialog.messageText = title
-  dialog.informativeText = message
+  // dialog.informativeText = message
 
   const viewWidth = 350
   const viewHeight = 300
