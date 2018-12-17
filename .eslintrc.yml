@@ -126,6 +126,11 @@ globals:
   MSImmutableDocumentData: false
   NSUTF8StringEncoding: false
   NSFileHandlingPanelOKButton: false
+  NSScrollView: false
+  NSView: false
+  NSBezelBorder: false
+  NSAttributedString: false
+  NSTextView: false
 
 parserOptions:
   sourceType: module

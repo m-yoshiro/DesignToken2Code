@@ -1,3 +1,8 @@
+/**
+ * Module for SketchUI.
+ * @module SketchUI/utils
+ */
+
 /* eslint-disable consistent-return */
 const sketch = require('sketch/dom')
 // Tokenとして扱うことのできる Layer Typeを指定

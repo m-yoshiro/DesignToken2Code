@@ -70,7 +70,7 @@ export default function(context) {
 
   createDialog({
     title: 'DesignTokens2Code',
-    message: outputData,
+    contentText: outputData,
     buttons: dialogButtons,
   })
 }
