@@ -2,6 +2,9 @@
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
     <item>
+      <enclosure url="https://github.com/m-yoshiro/DesignToken2Code/releases/download/v0.1.0/designtoken2code.sketchplugin.zip" sparkle:version="0.1.0"/>
+    </item>
+    <item>
       <enclosure url="https://github.com/m-yoshiro/DesignToken2Code/releases/download/v0.0.2-0/designtoken2code.sketchplugin.zip" sparkle:version="0.0.2-0"/>
     </item>
   </channel>
