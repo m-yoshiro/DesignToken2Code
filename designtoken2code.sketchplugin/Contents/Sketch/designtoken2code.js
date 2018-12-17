@@ -1,810 +1,491 @@
 var that = this
-function __skpm_run(key, context) {
-  that.context = context
-
-  var exports = /******/ (function(modules) {
-    // webpackBootstrap
-    /******/ // The module cache
-    /******/ var installedModules = {} // The require function
-    /******/
-    /******/ /******/ function __webpack_require__(moduleId) {
-      /******/
-      /******/ // Check if module is in cache
-      /******/ if (installedModules[moduleId]) {
-        /******/ return installedModules[moduleId].exports
-        /******/
-      } // Create a new module (and put it into the cache)
-      /******/ /******/ var module = (installedModules[moduleId] = {
-        /******/ i: moduleId,
-        /******/ l: false,
-        /******/ exports: {},
-        /******/
-      }) // Execute the module function
-      /******/
-      /******/ /******/ modules[moduleId].call(
-        module.exports,
-        module,
-        module.exports,
-        __webpack_require__
-      ) // Flag the module as loaded
-      /******/
-      /******/ /******/ module.l = true // Return the exports of the module
-      /******/
-      /******/ /******/ return module.exports
-      /******/
-    } // expose the modules object (__webpack_modules__)
-    /******/
-    /******/
-    /******/ /******/ __webpack_require__.m = modules // expose the module cache
-    /******/
-    /******/ /******/ __webpack_require__.c = installedModules // define getter function for harmony exports
-    /******/
-    /******/ /******/ __webpack_require__.d = function(exports, name, getter) {
-      /******/ if (!__webpack_require__.o(exports, name)) {
-        /******/ Object.defineProperty(exports, name, {
-          enumerable: true,
-          get: getter,
-        })
-        /******/
-      }
-      /******/
-    } // define __esModule on exports
-    /******/
-    /******/ /******/ __webpack_require__.r = function(exports) {
-      /******/ if (typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-        /******/ Object.defineProperty(exports, Symbol.toStringTag, {
-          value: 'Module',
-        })
-        /******/
-      }
-      /******/ Object.defineProperty(exports, '__esModule', { value: true })
-      /******/
-    } // create a fake namespace object // mode & 1: value is a module id, require it // mode & 2: merge all properties of value into the ns // mode & 4: return value when already ns object // mode & 8|1: behave like require
-    /******/
-    /******/ /******/ /******/ /******/ /******/ /******/ __webpack_require__.t = function(
-      value,
-      mode
-    ) {
-      /******/ if (mode & 1) value = __webpack_require__(value)
-      /******/ if (mode & 8) return value
-      /******/ if (
-        mode & 4 &&
-        typeof value === 'object' &&
-        value &&
-        value.__esModule
-      )
-        return value
-      /******/ var ns = Object.create(null)
-      /******/ __webpack_require__.r(ns)
-      /******/ Object.defineProperty(ns, 'default', {
-        enumerable: true,
-        value: value,
-      })
-      /******/ if (mode & 2 && typeof value != 'string')
-        for (var key in value)
-          __webpack_require__.d(
-            ns,
-            key,
-            function(key) {
-              return value[key]
-            }.bind(null, key)
-          )
-      /******/ return ns
-      /******/
-    } // getDefaultExport function for compatibility with non-harmony modules
-    /******/
-    /******/ /******/ __webpack_require__.n = function(module) {
-      /******/ var getter =
-        module && module.__esModule
-          ? /******/ function getDefault() {
-              return module['default']
-            }
-          : /******/ function getModuleExports() {
-              return module
-            }
-      /******/ __webpack_require__.d(getter, 'a', getter)
-      /******/ return getter
-      /******/
-    } // Object.prototype.hasOwnProperty.call
-    /******/
-    /******/ /******/ __webpack_require__.o = function(object, property) {
-      return Object.prototype.hasOwnProperty.call(object, property)
-    } // __webpack_public_path__
-    /******/
-    /******/ /******/ __webpack_require__.p = '' // Load entry module and return exports
-    /******/
-    /******/
-    /******/ /******/ return __webpack_require__(
-      (__webpack_require__.s = './src/designtoken2code.js')
+function __skpm_run(t, e) {
+  that.context = e
+  var n = (function(t) {
+    var e = {}
+    function n(r) {
+      if (e[r]) return e[r].exports
+      var o = (e[r] = { i: r, l: !1, exports: {} })
+      return t[r].call(o.exports, o, o.exports, n), (o.l = !0), o.exports
+    }
+    return (
+      (n.m = t),
+      (n.c = e),
+      (n.d = function(t, e, r) {
+        n.o(t, e) || Object.defineProperty(t, e, { enumerable: !0, get: r })
+      }),
+      (n.r = function(t) {
+        'undefined' != typeof Symbol &&
+          Symbol.toStringTag &&
+          Object.defineProperty(t, Symbol.toStringTag, { value: 'Module' }),
+          Object.defineProperty(t, '__esModule', { value: !0 })
+      }),
+      (n.t = function(t, e) {
+        if ((1 & e && (t = n(t)), 8 & e)) return t
+        if (4 & e && 'object' == typeof t && t && t.__esModule) return t
+        var r = Object.create(null)
+        if (
+          (n.r(r),
+          Object.defineProperty(r, 'default', { enumerable: !0, value: t }),
+          2 & e && 'string' != typeof t)
+        )
+          for (var o in t)
+            n.d(
+              r,
+              o,
+              function(e) {
+                return t[e]
+              }.bind(null, o)
+            )
+        return r
+      }),
+      (n.n = function(t) {
+        var e =
+          t && t.__esModule
+            ? function() {
+                return t.default
+              }
+            : function() {
+                return t
+              }
+        return n.d(e, 'a', e), e
+      }),
+      (n.o = function(t, e) {
+        return Object.prototype.hasOwnProperty.call(t, e)
+      }),
+      (n.p = ''),
+      n((n.s = './src/designtoken2code.js'))
     )
-    /******/
-  })(
-    /************************************************************************/
-    /******/ {
-      /***/ './src/config.js':
-        /*!***********************!*\
+  })({
+    './src/config.js':
+      /*!***********************!*\
   !*** ./src/config.js ***!
   \***********************/
-        /*! no static exports found */
-        /***/ function(module, exports) {
-          module.exports = {
-            prefix: '$color',
-            artboardName: 'Tokens',
-          }
-
-          /***/
-        },
-
-      /***/ './src/core/color.js':
-        /*!***************************!*\
+      /*! no static exports found */ function(t, e) {
+        t.exports = { prefix: '$color', artboardName: 'Tokens' }
+      },
+    './src/core/color.js':
+      /*!***************************!*\
   !*** ./src/core/color.js ***!
   \***************************/
-        /*! no static exports found */
-        /***/ function(module, exports) {
-          function _slicedToArray(arr, i) {
-            return (
-              _arrayWithHoles(arr) ||
-              _iterableToArrayLimit(arr, i) ||
-              _nonIterableRest()
-            )
-          }
-
-          function _nonIterableRest() {
-            throw new TypeError(
-              'Invalid attempt to destructure non-iterable instance'
-            )
-          }
-
-          function _iterableToArrayLimit(arr, i) {
-            var _arr = []
-            var _n = true
-            var _d = false
-            var _e = undefined
-            try {
-              for (
-                var _i = arr[Symbol.iterator](), _s;
-                !(_n = (_s = _i.next()).done);
-                _n = true
-              ) {
-                _arr.push(_s.value)
-                if (i && _arr.length === i) break
-              }
-            } catch (err) {
-              _d = true
-              _e = err
-            } finally {
+      /*! no static exports found */ function(t, e) {
+        function n(t, e) {
+          return (
+            (function(t) {
+              if (Array.isArray(t)) return t
+            })(t) ||
+            (function(t, e) {
+              var n = [],
+                r = !0,
+                o = !1,
+                a = void 0
               try {
-                if (!_n && _i['return'] != null) _i['return']()
+                for (
+                  var i, c = t[Symbol.iterator]();
+                  !(r = (i = c.next()).done) &&
+                  (n.push(i.value), !e || n.length !== e);
+                  r = !0
+                );
+              } catch (t) {
+                ;(o = !0), (a = t)
               } finally {
-                if (_d) throw _e
-              }
-            }
-            return _arr
-          }
-
-          function _arrayWithHoles(arr) {
-            if (Array.isArray(arr)) return arr
-          }
-
-          function _classCallCheck(instance, Constructor) {
-            if (!(instance instanceof Constructor)) {
-              throw new TypeError('Cannot call a class as a function')
-            }
-          }
-
-          function _defineProperties(target, props) {
-            for (var i = 0; i < props.length; i++) {
-              var descriptor = props[i]
-              descriptor.enumerable = descriptor.enumerable || false
-              descriptor.configurable = true
-              if ('value' in descriptor) descriptor.writable = true
-              Object.defineProperty(target, descriptor.key, descriptor)
-            }
-          }
-
-          function _createClass(Constructor, protoProps, staticProps) {
-            if (protoProps) _defineProperties(Constructor.prototype, protoProps)
-            if (staticProps) _defineProperties(Constructor, staticProps)
-            return Constructor
-          }
-
-          module.exports =
-            /*#__PURE__*/
-            (function() {
-              function Color(value) {
-                _classCallCheck(this, Color)
-
-                this.value = value
-              }
-
-              _createClass(Color, [
-                {
-                  key: 'toHEX',
-                  value: function toHEX() {
-                    // https://gist.github.com/comficker/871d378c535854c1c460f7867a191a5a#gistcomment-2615849
-                    var hexPattern = /^#?(?:([0-9a-f]{3})|([0-9a-f]{6})(?:[0-9a-f]{2})?)$/i
-
-                    var _ref = this.value.match(hexPattern) || [],
-                      _ref2 = _slicedToArray(_ref, 3),
-                      short = _ref2[1],
-                      long = _ref2[2]
-
-                    if (long) {
-                      return '#'.concat(long)
-                    }
-
-                    if (short) {
-                      return '#'.concat(short)
-                    }
-
-                    return undefined
-                  },
-                },
-              ])
-
-              return Color
-            })()
-
-          /***/
-        },
-
-      /***/ './src/core/design-tokens.js':
-        /*!***********************************!*\
-  !*** ./src/core/design-tokens.js ***!
-  \***********************************/
-        /*! no static exports found */
-        /***/ function(module, exports, __webpack_require__) {
-          function _classCallCheck(instance, Constructor) {
-            if (!(instance instanceof Constructor)) {
-              throw new TypeError('Cannot call a class as a function')
-            }
-          }
-
-          function _defineProperties(target, props) {
-            for (var i = 0; i < props.length; i++) {
-              var descriptor = props[i]
-              descriptor.enumerable = descriptor.enumerable || false
-              descriptor.configurable = true
-              if ('value' in descriptor) descriptor.writable = true
-              Object.defineProperty(target, descriptor.key, descriptor)
-            }
-          }
-
-          function _createClass(Constructor, protoProps, staticProps) {
-            if (protoProps) _defineProperties(Constructor.prototype, protoProps)
-            if (staticProps) _defineProperties(Constructor, staticProps)
-            return Constructor
-          }
-
-          var Token = __webpack_require__(/*! ./token */ './src/core/token.js')
-
-          module.exports =
-            /*#__PURE__*/
-            (function() {
-              function DesignTokens(data) {
-                var config =
-                  arguments.length > 1 && arguments[1] !== undefined
-                    ? arguments[1]
-                    : {
-                        outputFormat: 'scss',
-                      }
-
-                _classCallCheck(this, DesignTokens)
-
-                this.tokens = []
-                this.config = config
-                this.initTokens(data)
-              }
-
-              _createClass(DesignTokens, [
-                {
-                  key: 'initTokens',
-                  value: function initTokens(data) {
-                    if (!Array.isArray(data)) {
-                      return new TypeError('"data must be Array"')
-                    }
-
-                    this.tokens = data.map(function(element) {
-                      return new Token(element)
-                    })
-                    return null
-                  },
-                },
-                {
-                  key: 'output',
-                  value: function output() {
-                    var outputFormat = this.config.outputFormat
-                    var outputData
-
-                    switch (outputFormat) {
-                      case 'scss':
-                        outputData = this.tokens
-                          .map(function(token) {
-                            return token.toScss()
-                          })
-                          .join('\n')
-                        break
-
-                      case 'css':
-                        outputData = this.tokens
-                          .map(function(token) {
-                            return token.toCss()
-                          })
-                          .join('\n')
-                        break
-
-                      default:
-                        break
-                    }
-
-                    return outputData
-                  },
-                },
-                {
-                  key: 'setOutputFormat',
-                  set: function set(format) {
-                    this.config.outputFormat = format
-                  },
-                },
-              ])
-
-              return DesignTokens
-            })()
-
-          /***/
-        },
-
-      /***/ './src/core/token.js':
-        /*!***************************!*\
-  !*** ./src/core/token.js ***!
-  \***************************/
-        /*! no static exports found */
-        /***/ function(module, exports, __webpack_require__) {
-          function _classCallCheck(instance, Constructor) {
-            if (!(instance instanceof Constructor)) {
-              throw new TypeError('Cannot call a class as a function')
-            }
-          }
-
-          function _defineProperties(target, props) {
-            for (var i = 0; i < props.length; i++) {
-              var descriptor = props[i]
-              descriptor.enumerable = descriptor.enumerable || false
-              descriptor.configurable = true
-              if ('value' in descriptor) descriptor.writable = true
-              Object.defineProperty(target, descriptor.key, descriptor)
-            }
-          }
-
-          function _createClass(Constructor, protoProps, staticProps) {
-            if (protoProps) _defineProperties(Constructor.prototype, protoProps)
-            if (staticProps) _defineProperties(Constructor, staticProps)
-            return Constructor
-          }
-
-          var Color = __webpack_require__(/*! ./color */ './src/core/color.js')
-
-          var tokenProps = {
-            type: {
-              type: 'string',
-            },
-            name: {
-              type: 'string',
-            },
-            value: {
-              type: 'string',
-            },
-          }
-
-          module.exports =
-            /*#__PURE__*/
-            (function() {
-              function Token(data) {
-                _classCallCheck(this, Token)
-
-                this.data = data
-                this.validate()
-
-                if (this.data.type === 'color') {
-                  this.color = new Color(this.data.value)
+                try {
+                  r || null == c.return || c.return()
+                } finally {
+                  if (o) throw a
                 }
               }
-
-              _createClass(Token, [
-                {
-                  key: 'validate',
-                  value: function validate() {
-                    var _this = this
-
-                    Object.keys(tokenProps).forEach(function(key) {
-                      if (!(key in _this.data)) {
-                        throw new ReferenceError(
-                          'Data must have '.concat(key, ' property.')
-                        )
-                      }
-
-                      if (typeof _this.data[key] !== 'string') {
-                        throw new TypeError(
-                          ''
-                            .concat(key, ' must be ')
-                            .concat(tokenProps[key].type)
-                        )
-                      }
-                    })
-                  },
-                },
-                {
-                  key: 'toScss',
-                  value: function toScss() {
-                    var _this$data = this.data,
-                      name = _this$data.name,
-                      value = _this$data.value
-                    var type = this.data.type
-                    value = type === 'color' ? new Color(value).toHEX() : value
-                    name = '$'.concat(name.replace(/^\$?(.*)/, '$1'))
-                    return ''.concat(name, ': ').concat(value, ' !default;')
-                  },
-                },
-                {
-                  key: 'toCss',
-                  value: function toCss() {
-                    var _this$data2 = this.data,
-                      name = _this$data2.name,
-                      value = _this$data2.value
-                    var type = this.data.type
-                    value = type === 'color' ? new Color(value).toHEX() : value
-                    name = '--'.concat(name.replace(/^\$?(.*)/, '$1'))
-                    return ''.concat(name, ': ').concat(value, ';')
-                  },
-                },
-              ])
-
-              return Token
+              return n
+            })(t, e) ||
+            (function() {
+              throw new TypeError(
+                'Invalid attempt to destructure non-iterable instance'
+              )
             })()
-
-          /***/
-        },
-
-      /***/ './src/designtoken2code.js':
-        /*!*********************************!*\
-  !*** ./src/designtoken2code.js ***!
-  \*********************************/
-        /*! exports provided: default */
-        /***/ function(module, __webpack_exports__, __webpack_require__) {
-          'use strict'
-          __webpack_require__.r(__webpack_exports__)
-          var sketch = __webpack_require__(/*! sketch/dom */ 'sketch/dom')
-
-          var _require = __webpack_require__(/*! sketch */ 'sketch'),
-            UI = _require.UI
-
-          var _require2 = __webpack_require__(
-              /*! ./config */ './src/config.js'
-            ),
-            prefix = _require2.prefix,
-            artboardName = _require2.artboardName
-
-          var _require3 = __webpack_require__(/*! ./utils */ './src/utils.js'),
-            escapeRegExp = _require3.escapeRegExp
-
-          var DesignTokens = __webpack_require__(
-            /*! ./core/design-tokens */ './src/core/design-tokens.js'
           )
-
-          var _require4 = __webpack_require__(
-              /*! ./sketch-ui/index */ './src/sketch-ui/index.js'
-            ),
-            createDialog = _require4.createDialog,
-            openPanel = _require4.openPanel
-
-          var _require5 = __webpack_require__(
-              /*! ./sketch-ui/utils */ './src/sketch-ui/utils.js'
-            ),
-            pasteBoardWrite = _require5.pasteBoardWrite,
-            extractTokenLayersByPattern = _require5.extractTokenLayersByPattern,
-            convertLayersToTokenData = _require5.convertLayersToTokenData,
-            writeToFile = _require5.writeToFile
-
-          var CONFIG = {
-            outputFormat: 'scss',
+        }
+        function r(t, e) {
+          for (var n = 0; n < e.length; n++) {
+            var r = e[n]
+            ;(r.enumerable = r.enumerable || !1),
+              (r.configurable = !0),
+              'value' in r && (r.writable = !0),
+              Object.defineProperty(t, r.key, r)
           }
-          /* harmony default export */ __webpack_exports__[
-            'default'
-          ] = function(context) {
-            var document = sketch.fromNative(context.document)
-            var tokensArtboard = document.getLayersNamed(artboardName)[0]
-            var tokenNamePattern = new RegExp(''.concat(escapeRegExp(prefix)))
-
-            if (!tokensArtboard.layers.length) {
-              UI.message('Not found')
-              return
-            }
-
-            var tokenLayers = extractTokenLayersByPattern(
-              tokensArtboard,
-              tokenNamePattern
-            )
-            log(tokenLayers)
-            var tokenData = new DesignTokens(
-              convertLayersToTokenData(tokenLayers)
-            ) // TODO: UI上でformatを変更できるようにする
-            // 現在はSCSSに固定している
-
-            tokenData.setOutputFormat = CONFIG.outputFormat
-            var outputData = tokenData.output() // Dialog
-
-            var dialogButtons = [
+        }
+        t.exports = (function() {
+          function t(e) {
+            !(function(t, e) {
+              if (!(t instanceof e))
+                throw new TypeError('Cannot call a class as a function')
+            })(this, t),
+              (this.value = e)
+          }
+          return (
+            (function(t, e, n) {
+              e && r(t.prototype, e), n && r(t, n)
+            })(t, [
               {
-                text: 'Copy',
-                action: function action() {
-                  pasteBoardWrite(
-                    {
-                      data: outputData,
-                      message: 'Copied',
-                    },
-                    context
-                  )
+                key: 'toHEX',
+                value: function() {
+                  var t = n(
+                      this.value.match(
+                        /^#?(?:([0-9a-f]{3})|([0-9a-f]{6})(?:[0-9a-f]{2})?)$/i
+                      ) || [],
+                      3
+                    ),
+                    e = t[1],
+                    r = t[2]
+                  return r ? '#'.concat(r) : e ? '#'.concat(e) : void 0
+                },
+              },
+            ]),
+            t
+          )
+        })()
+      },
+    './src/core/design-tokens.js':
+      /*!***********************************!*\
+  !*** ./src/core/design-tokens.js ***!
+  \***********************************/
+      /*! no static exports found */ function(t, e, n) {
+        function r(t, e) {
+          for (var n = 0; n < e.length; n++) {
+            var r = e[n]
+            ;(r.enumerable = r.enumerable || !1),
+              (r.configurable = !0),
+              'value' in r && (r.writable = !0),
+              Object.defineProperty(t, r.key, r)
+          }
+        }
+        var o = n(/*! ./token */ './src/core/token.js')
+        t.exports = (function() {
+          function t(e) {
+            var n =
+              arguments.length > 1 && void 0 !== arguments[1]
+                ? arguments[1]
+                : { outputFormat: 'scss' }
+            !(function(t, e) {
+              if (!(t instanceof e))
+                throw new TypeError('Cannot call a class as a function')
+            })(this, t),
+              (this.tokens = []),
+              (this.config = n),
+              this.initTokens(e)
+          }
+          return (
+            (function(t, e, n) {
+              e && r(t.prototype, e), n && r(t, n)
+            })(t, [
+              {
+                key: 'initTokens',
+                value: function(t) {
+                  return Array.isArray(t)
+                    ? ((this.tokens = t.map(function(t) {
+                        return new o(t)
+                      })),
+                      null)
+                    : new TypeError('"data must be Array"')
                 },
               },
               {
-                text: 'Save as',
-                action: function action() {
-                  openPanel(function(filePath) {
-                    writeToFile(
-                      ''
-                        .concat(filePath, '/color.')
-                        .concat(CONFIG.outputFormat),
-                      ''.concat(outputData)
-                    )
+                key: 'output',
+                value: function() {
+                  var t
+                  switch (this.config.outputFormat) {
+                    case 'scss':
+                      t = this.tokens
+                        .map(function(t) {
+                          return t.toScss()
+                        })
+                        .join('\n')
+                      break
+                    case 'css':
+                      t = this.tokens
+                        .map(function(t) {
+                          return t.toCss()
+                        })
+                        .join('\n')
+                  }
+                  return t
+                },
+              },
+              {
+                key: 'setOutputFormat',
+                set: function(t) {
+                  this.config.outputFormat = t
+                },
+              },
+            ]),
+            t
+          )
+        })()
+      },
+    './src/core/token.js':
+      /*!***************************!*\
+  !*** ./src/core/token.js ***!
+  \***************************/
+      /*! no static exports found */ function(t, e, n) {
+        function r(t, e) {
+          for (var n = 0; n < e.length; n++) {
+            var r = e[n]
+            ;(r.enumerable = r.enumerable || !1),
+              (r.configurable = !0),
+              'value' in r && (r.writable = !0),
+              Object.defineProperty(t, r.key, r)
+          }
+        }
+        var o = n(/*! ./color */ './src/core/color.js'),
+          a = {
+            type: { type: 'string' },
+            name: { type: 'string' },
+            value: { type: 'string' },
+          }
+        t.exports = (function() {
+          function t(e) {
+            !(function(t, e) {
+              if (!(t instanceof e))
+                throw new TypeError('Cannot call a class as a function')
+            })(this, t),
+              (this.data = e),
+              this.validate(),
+              'color' === this.data.type &&
+                (this.color = new o(this.data.value))
+          }
+          return (
+            (function(t, e, n) {
+              e && r(t.prototype, e), n && r(t, n)
+            })(t, [
+              {
+                key: 'validate',
+                value: function() {
+                  var t = this
+                  Object.keys(a).forEach(function(e) {
+                    if (!(e in t.data))
+                      throw new ReferenceError(
+                        'Data must have '.concat(e, ' property.')
+                      )
+                    if ('string' != typeof t.data[e])
+                      throw new TypeError(
+                        ''.concat(e, ' must be ').concat(a[e].type)
+                      )
                   })
                 },
               },
               {
-                text: 'Close',
+                key: 'toScss',
+                value: function() {
+                  var t = this.data,
+                    e = t.name,
+                    n = t.value
+                  return (
+                    (n = 'color' === this.data.type ? new o(n).toHEX() : n),
+                    (e = '$'.concat(e.replace(/^\$?(.*)/, '$1'))),
+                    ''.concat(e, ': ').concat(n, ' !default;')
+                  )
+                },
               },
-            ]
-            createDialog({
+              {
+                key: 'toCss',
+                value: function() {
+                  var t = this.data,
+                    e = t.name,
+                    n = t.value
+                  return (
+                    (n = 'color' === this.data.type ? new o(n).toHEX() : n),
+                    (e = '--'.concat(e.replace(/^\$?(.*)/, '$1'))),
+                    ''.concat(e, ': ').concat(n, ';')
+                  )
+                },
+              },
+            ]),
+            t
+          )
+        })()
+      },
+    './src/designtoken2code.js':
+      /*!*********************************!*\
+  !*** ./src/designtoken2code.js ***!
+  \*********************************/
+      /*! exports provided: default */ function(t, e, n) {
+        'use strict'
+        n.r(e)
+        var r = n(/*! sketch/dom */ 'sketch/dom'),
+          o = n(/*! sketch */ 'sketch').UI,
+          a = n(/*! ./config */ './src/config.js'),
+          i = a.prefix,
+          c = a.artboardName,
+          s = n(/*! ./utils */ './src/utils.js').escapeRegExp,
+          u = n(/*! ./core/design-tokens */ './src/core/design-tokens.js'),
+          l = n(/*! ./sketch-ui/index */ './src/sketch-ui/index.js'),
+          f = l.createDialog,
+          p = l.openPanel,
+          d = n(/*! ./sketch-ui/utils */ './src/sketch-ui/utils.js'),
+          y = d.pasteBoardWrite,
+          h = d.extractTokenLayersByPattern,
+          v = d.convertLayersToTokenData,
+          m = d.writeToFile,
+          g = 'scss'
+        e.default = function(t) {
+          var e = r.fromNative(t.document).getLayersNamed(c)[0],
+            n = new RegExp(''.concat(s(i)))
+          if (e.layers.length) {
+            var a = h(e, n)
+            log(a)
+            var l = new u(v(a))
+            l.setOutputFormat = g
+            var d = l.output()
+            f({
               title: 'DesignTokens2Code',
-              contentText: outputData,
-              buttons: dialogButtons,
+              contentText: d,
+              buttons: [
+                {
+                  text: 'Copy',
+                  action: function() {
+                    y({ data: d, message: 'Copied' }, t)
+                  },
+                },
+                {
+                  text: 'Save as',
+                  action: function() {
+                    p(function(t) {
+                      m(''.concat(t, '/color.').concat(g), ''.concat(d))
+                    })
+                  },
+                },
+                { text: 'Close' },
+              ],
             })
-          }
-
-          /***/
-        },
-
-      /***/ './src/sketch-ui/index.js':
-        /*!********************************!*\
+          } else o.message('Not found')
+        }
+      },
+    './src/sketch-ui/index.js':
+      /*!********************************!*\
   !*** ./src/sketch-ui/index.js ***!
   \********************************/
-        /*! no static exports found */
-        /***/ function(module, exports) {
-          var _this = this
-
-          /**
-           * Module for SketchUI.
-           * @module SketchUI
-           */
-
-          /**
-           * Create Dialog.
-           * @param {string} title - the title of the dialog
-           * @param {string} message - the message of the dialog by using informativeText.
-           * @param {string} contentText - the contentText
-           * @param {array} buttons - the buttons of the dialog.
-           */
-          module.exports.createDialog = function(_ref) {
-            var title = _ref.title,
-              message = _ref.message,
-              contentText = _ref.contentText,
-              buttons = _ref.buttons
-
-            if (
-              title === undefined ||
-              (message === undefined && contentText === undefined)
-            ) {
-              throw new Error('"title" or "message" is no arguments.')
-            } // Content View sizes
-
-            var viewWidth = 350
-            var viewHeight = 300
-            var dialog = NSAlert.alloc().init()
-            dialog.messageText = title
-
-            if (message) {
-              dialog.informativeText = message
-            }
-
-            if (contentText) {
-              var theTextView = NSTextView.alloc().initWithFrame(
-                NSMakeRect(0, 0, viewWidth, viewHeight)
-              )
-              var scrollView = NSScrollView.alloc().initWithFrame(
-                NSMakeRect(0, 0, viewWidth, viewHeight - 30)
-              )
-              var accessoryView = NSView.alloc().init() // Insert contentText
-
-              theTextView.setString(contentText) // Put contentText into scrollView
-
-              scrollView.setHasVerticalScroller(true)
-              scrollView.setBorderType(NSBezelBorder)
-              scrollView.setDocumentView(theTextView) // Put scrollView into accessoryView
-
-              accessoryView.setFlipped(true)
-              accessoryView.setFrame(NSMakeRect(0, 0, viewWidth, viewHeight))
-              accessoryView.addSubview(scrollView)
-              dialog.setAccessoryView(scrollView)
-            }
-
-            if (buttons !== undefined && !Array.isArray(buttons)) {
-              throw new TypeError('"buttons" must be Array.')
-            } else if (buttons.length > 0) {
-              buttons.forEach(function(button) {
-                dialog.addButtonWithTitle(button.text)
-              })
-            } // https://github.com/skpm/dialog/blob/master/lib/message-box.js#L96
-
-            var response = Number(dialog.runModal()) - 1000
-
-            if (
-              buttons[response].action &&
-              typeof buttons[response].action === 'function'
-            ) {
-              buttons[response].action()
-            }
+      /*! no static exports found */ function(t, e) {
+        var n = this
+        ;(t.exports.createDialog = function(t) {
+          var e = t.title,
+            n = t.message,
+            r = t.contentText,
+            o = t.buttons
+          if (void 0 === e || (void 0 === n && void 0 === r))
+            throw new Error('"title" or "message" is no arguments.')
+          var a = NSAlert.alloc().init()
+          if (((a.messageText = e), n && (a.informativeText = n), r)) {
+            var i = NSTextView.alloc().initWithFrame(
+                NSMakeRect(0, 0, 350, 300)
+              ),
+              c = NSScrollView.alloc().initWithFrame(
+                NSMakeRect(0, 0, 350, 270)
+              ),
+              s = NSView.alloc().init()
+            i.setString(r),
+              c.setHasVerticalScroller(!0),
+              c.setBorderType(NSBezelBorder),
+              c.setDocumentView(i),
+              s.setFlipped(!0),
+              s.setFrame(NSMakeRect(0, 0, 350, 300)),
+              s.addSubview(c),
+              a.setAccessoryView(c)
           }
-          /**
-           * Open Panel.
-           * @param {function} callback - Callback will run after opening panel.
-           */
-
-          module.exports.openPanel = function(callback) {
-            var panel = NSOpenPanel.openPanel()
-            panel.canChooseDirectories = true
-            panel.canCreateDirectories = true
-            panel.allowsMultipleSelection = false
-            var clicked = panel.runModal()
-
-            if (clicked === NSFileHandlingPanelOKButton) {
-              var firstURL = panel.URL().path()
-              var filePath = NSString.stringWithFormat('%@', firstURL)
-
-              if (filePath.indexOf('file://') === 0) {
-                filePath = filePath.substring(7)
-              }
-
-              callback.bind(_this, filePath)()
+          if (void 0 !== o && !Array.isArray(o))
+            throw new TypeError('"buttons" must be Array.')
+          o.length > 0 &&
+            o.forEach(function(t) {
+              a.addButtonWithTitle(t.text)
+            })
+          var u = Number(a.runModal()) - 1e3
+          o[u].action && 'function' == typeof o[u].action && o[u].action()
+        }),
+          (t.exports.openPanel = function(t) {
+            var e = NSOpenPanel.openPanel()
+            if (
+              ((e.canChooseDirectories = !0),
+              (e.canCreateDirectories = !0),
+              (e.allowsMultipleSelection = !1),
+              e.runModal() === NSFileHandlingPanelOKButton)
+            ) {
+              var r = e.URL().path(),
+                o = NSString.stringWithFormat('%@', r)
+              0 === o.indexOf('file://') && (o = o.substring(7)), t.bind(n, o)()
             }
-          }
-
-          /***/
-        },
-
-      /***/ './src/sketch-ui/utils.js':
-        /*!********************************!*\
+          })
+      },
+    './src/sketch-ui/utils.js':
+      /*!********************************!*\
   !*** ./src/sketch-ui/utils.js ***!
   \********************************/
-        /*! no static exports found */
-        /***/ function(module, exports, __webpack_require__) {
-          /**
-           * Module for SketchUI.
-           * @module SketchUI/utils
-           */
-
-          /* eslint-disable consistent-return */
-          var sketch = __webpack_require__(/*! sketch/dom */ 'sketch/dom') // Tokenとして扱うことのできる Layer Typeを指定
-
-          var tokenLayerTypes = [''.concat(sketch.Types.ShapePath)]
-
-          module.exports.pasteBoardWrite = function(_ref, context) {
-            var data = _ref.data,
-              _ref$message = _ref.message,
-              message = _ref$message === void 0 ? 'Copied' : _ref$message
-
-            if (data === undefined) {
-              throw new Error('"data" is not exist')
-            }
-
-            if (context.document.type === 'Document') {
-              throw new TypeError('"context" must be Sketch/dom')
-            }
-
-            var pasteBoard = NSPasteboard.generalPasteboard()
-            pasteBoard.clearContents()
-            pasteBoard.writeObjects([data])
-            context.document.showMessage(message)
-          }
-
-          module.exports.extractTokenLayersByPattern = function(
-            object,
-            pattern
-          ) {
-            var tokenLayers = [] // eslint-disable-next-line no-shadow
-
-            var recursiveSearch = function recursiveSearch(object) {
-              if (object.layers && object.layers.length) {
-                object.layers.forEach(recursiveSearch)
-              }
-
-              if (
-                pattern.test(object.name) &&
-                tokenLayerTypes.some(function(type) {
-                  return type === object.type
-                }) &&
-                object.style.fills &&
-                object.style.fills.length
-              ) {
-                tokenLayers.push(object)
-              }
-            }
-
-            recursiveSearch(object)
-            return tokenLayers
-          }
-
-          module.exports.convertLayersToTokenData = function(layers) {
-            return layers.map(function(layer) {
+      /*! no static exports found */ function(t, e, n) {
+        var r = n(/*! sketch/dom */ 'sketch/dom'),
+          o = [''.concat(r.Types.ShapePath)]
+        ;(t.exports.pasteBoardWrite = function(t, e) {
+          var n = t.data,
+            r = t.message,
+            o = void 0 === r ? 'Copied' : r
+          if (void 0 === n) throw new Error('"data" is not exist')
+          if ('Document' === e.document.type)
+            throw new TypeError('"context" must be Sketch/dom')
+          var a = NSPasteboard.generalPasteboard()
+          a.clearContents(), a.writeObjects([n]), e.document.showMessage(o)
+        }),
+          (t.exports.extractTokenLayersByPattern = function(t, e) {
+            var n = []
+            return (
+              (function t(r) {
+                r.layers && r.layers.length && r.layers.forEach(t),
+                  e.test(r.name) &&
+                    o.some(function(t) {
+                      return t === r.type
+                    }) &&
+                    r.style.fills &&
+                    r.style.fills.length &&
+                    n.push(r)
+              })(t),
+              n
+            )
+          }),
+          (t.exports.convertLayersToTokenData = function(t) {
+            return t.map(function(t) {
               return {
                 type: 'color',
-                name: layer.name,
-                value: layer.style.fills[0].color,
+                name: t.name,
+                value: t.style.fills[0].color,
               }
             })
-          }
-
-          module.exports.writeToFile = function(path, content) {
-            var file = NSString.stringWithFormat('%@', content)
-            return file.writeToFile_atomically(path, true)
-          }
-
-          /***/
-        },
-
-      /***/ './src/utils.js':
-        /*!**********************!*\
+          }),
+          (t.exports.writeToFile = function(t, e) {
+            return NSString.stringWithFormat('%@', e).writeToFile_atomically(
+              t,
+              !0
+            )
+          })
+      },
+    './src/utils.js':
+      /*!**********************!*\
   !*** ./src/utils.js ***!
   \**********************/
-        /*! no static exports found */
-        /***/ function(module, exports) {
-          // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-          module.exports.escapeRegExp = function(string) {
-            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-          } // $& means the whole matched string
-
-          /***/
-        },
-
-      /***/ sketch:
-        /*!*************************!*\
+      /*! no static exports found */ function(t, e) {
+        t.exports.escapeRegExp = function(t) {
+          return t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+        }
+      },
+    sketch:
+      /*!*************************!*\
   !*** external "sketch" ***!
   \*************************/
-        /*! no static exports found */
-        /***/ function(module, exports) {
-          module.exports = require('sketch')
-
-          /***/
-        },
-
-      /***/ 'sketch/dom':
-        /*!*****************************!*\
+      /*! no static exports found */ function(t, e) {
+        t.exports = require('sketch')
+      },
+    'sketch/dom':
+      /*!*****************************!*\
   !*** external "sketch/dom" ***!
   \*****************************/
-        /*! no static exports found */
-        /***/ function(module, exports) {
-          module.exports = require('sketch/dom')
-
-          /***/
-        },
-
-      /******/
-    }
-  )
-  if (key === 'default' && typeof exports === 'function') {
-    exports(context)
-  } else {
-    exports[key](context)
-  }
+      /*! no static exports found */ function(t, e) {
+        t.exports = require('sketch/dom')
+      },
+  })
+  'default' === t && 'function' == typeof n ? n(e) : n[t](e)
 }
-that['onRun'] = __skpm_run.bind(this, 'default')
-
-//# sourceMappingURL=designtoken2code.js.map
+that.onRun = __skpm_run.bind(this, 'default')

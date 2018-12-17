@@ -15,7 +15,7 @@
       "run"
     ]
   },
-  "version": "0.0.2-0",
+  "version": "0.1.0",
   "description": "Convert design tokens to SCSS variables as code",
   "name": "DesignToken2Code",
   "identifier": "DesignToken2Code",
