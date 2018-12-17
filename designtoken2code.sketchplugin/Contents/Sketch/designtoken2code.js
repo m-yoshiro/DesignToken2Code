@@ -686,6 +686,11 @@ function __skpm_run(key, context) {
   \********************************/
         /*! no static exports found */
         /***/ function(module, exports, __webpack_require__) {
+          /**
+           * Module for SketchUI.
+           * @module SketchUI/utils
+           */
+
           /* eslint-disable consistent-return */
           var sketch = __webpack_require__(/*! sketch/dom */ 'sketch/dom') // Tokenとして扱うことのできる Layer Typeを指定
 
