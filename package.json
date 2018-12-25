@@ -23,6 +23,7 @@
     "lint-staged": "lint-staged",
     "prettier:base": "prettier --single-quote --trailing-comma es5 --no-semi --write",
     "prettify": "npm run prettier:base \"./src/**/*.js\"",
+    "jsdoc": "jsdoc -c \"./jsdoc.conf.json\"",
     "test": "mocha --require @babel/register --recursive"
   },
   "devDependencies": {
