@@ -3,6 +3,6 @@
     "include": ["src/sketch-ui"]
   },
   "opts": {
-    "destination": "./docs/js"
+    "destination": "./.jsdoc/"
   }
 }
