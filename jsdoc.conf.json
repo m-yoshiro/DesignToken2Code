@@ -1,0 +1,8 @@
+{
+  "source": {
+    "include": ["src/sketch-ui"]
+  },
+  "opts": {
+    "destination": "./.jsdoc/"
+  }
+}
