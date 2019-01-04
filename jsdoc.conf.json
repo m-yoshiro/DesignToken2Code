@@ -1,6 +1,6 @@
 {
   "source": {
-    "include": ["src/sketch-ui"]
+    "include": ["src", "src/sketch-ui", "src/core"]
   },
   "opts": {
     "destination": "./.jsdoc/"

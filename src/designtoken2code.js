@@ -1,3 +1,8 @@
+/**
+ * Main module.
+ * @module DesignTokens2Code
+ */
+
 const sketch = require('sketch/dom')
 const { UI } = require('sketch')
 const { prefix, artboardName } = require('./config')
@@ -15,6 +20,10 @@ const CONFIG = {
   outputFormat: 'scss',
 }
 
+/**
+ * Run DesignToken2Code.
+ * @param {object} context - A Script Context which contains Sketch variables.
+ */
 export default function(context) {
   const document = sketch.fromNative(context.document)
   const tokensArtboard = document.getLayersNamed(artboardName)[0]
