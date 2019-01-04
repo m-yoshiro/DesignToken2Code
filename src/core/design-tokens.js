@@ -1,6 +1,13 @@
 const Token = require('./token')
 
+/**
+ * Class DesignTokens
+ */
 module.exports = class DesignTokens {
+  /**
+   * @param {array} data - the data of tokens.
+   * @param {object} config - the config like a output format.
+   */
   constructor(
     data,
     config = {
@@ -12,6 +19,10 @@ module.exports = class DesignTokens {
     this.initTokens(data)
   }
 
+  /**
+   * @param {array} data - the data of tokens.
+   * @return {null}
+   */
   initTokens(data) {
     if (!Array.isArray(data)) {
       return new TypeError('"data must be Array"')
@@ -21,6 +32,10 @@ module.exports = class DesignTokens {
     return null
   }
 
+  /**
+   * @param {string} format - the format of output data.
+   * @return {array} output data.
+   */
   set setOutputFormat(format) {
     this.config.outputFormat = format
   }
