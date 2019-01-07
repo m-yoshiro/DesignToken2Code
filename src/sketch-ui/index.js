@@ -40,6 +40,7 @@ module.exports.createDialog = ({ title, message, contentText, buttons }) => {
 
     // Insert contentText
     theTextView.setString(contentText)
+    theTextView.editable = false
 
     // Put contentText into scrollView
     scrollView.setHasVerticalScroller(true)
