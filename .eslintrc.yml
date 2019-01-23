@@ -131,6 +131,9 @@ globals:
   NSBezelBorder: false
   NSAttributedString: false
   NSTextView: false
+  NSButton: false
+  NSButtonCell: false
+  NSRadioButton: false
 
 parserOptions:
   sourceType: module
