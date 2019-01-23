@@ -37,6 +37,12 @@ module.exports.createDialog = ({ title, message, contentText, buttons }) => {
       NSMakeRect(0, 0, viewWidth, viewHeight - 30)
     )
     const accessoryView = NSView.alloc().init()
+    const radioButton1 = NSButton.alloc().initWithFrame(
+      NSMakeRect(0, 0, 300, 18)
+    )
+    radioButton1.setButtonType(NSRadioButton)
+    radioButton1.setTitle('First')
+    radioButton1.setState(true)
 
     // Insert contentText
     theTextView.setString(contentText)
@@ -53,6 +59,7 @@ module.exports.createDialog = ({ title, message, contentText, buttons }) => {
     accessoryView.addSubview(scrollView)
 
     dialog.setAccessoryView(scrollView)
+    dialog.setAccessoryView(radioButton1)
   }
 
   if (buttons !== undefined && !Array.isArray(buttons)) {
